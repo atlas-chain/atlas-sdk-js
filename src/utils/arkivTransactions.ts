@@ -1,15 +1,15 @@
 import {
   type Address,
-  type Hex,
-  type TransactionReceipt,
   ContractFunctionExecutionError,
   ContractFunctionRevertedError,
   encodePacked,
+  type Hex,
   keccak256,
   parseAbi,
+  TransactionExecutionError,
+  type TransactionReceipt,
   toBytes,
   toHex,
-  TransactionExecutionError,
 } from "viem"
 import type { ChangeOwnershipParameters } from "../actions/wallet/changeOwnership"
 import type { CreateEntityParameters } from "../actions/wallet/createEntity"
@@ -63,9 +63,7 @@ export const ENTITY_ERRORS_ABI = parseAbi([
 
 const EXECUTE_ABI = [...ENTITY_EXECUTE_ABI, ...ENTITY_ERRORS_ABI]
 
-const ENTITY_NONCE_ABI = parseAbi([
-  "function nonces(address owner) view returns (uint32)",
-])
+const ENTITY_NONCE_ABI = parseAbi(["function nonces(address owner) view returns (uint32)"])
 
 const ZERO_ADDRESS: Address = "0x0000000000000000000000000000000000000000"
 const ZERO_32 = `0x${"00".repeat(32)}` as Hex
@@ -88,6 +86,11 @@ function encodeMime128(contentType: string): { data: readonly [Hex, Hex, Hex, He
   return { data: contentType ? encodeBytes128(toBytes(contentType)) : EMPTY_BYTES128 }
 }
 
+function encodeUintAttributeValue(value: number | bigint | boolean): readonly [Hex, Hex, Hex, Hex] {
+  const numVal = typeof value === "boolean" ? (value ? 1n : 0n) : BigInt(value)
+  return [toHex(numVal, { size: 32 }), ZERO_32, ZERO_32, ZERO_32] as const
+}
+
 function encodeAttribute(attr: { key: string; value: string | number | bigint | boolean }) {
   // Ident32 name: string key encoded as left-aligned bytes32
   const name = toHex(attr.key, { size: 32 })
@@ -100,11 +103,10 @@ function encodeAttribute(attr: { key: string; value: string | number | bigint | 
     }
   }
 
-  const numVal = typeof attr.value === "boolean" ? (attr.value ? 1n : 0n) : BigInt(attr.value)
   return {
     name,
     valueType: AttributeValueType.Uint,
-    value: [toHex(numVal, { size: 32 }), ZERO_32, ZERO_32, ZERO_32] as const,
+    value: encodeUintAttributeValue(attr.value),
   }
 }
 
@@ -141,6 +143,7 @@ export async function sendArkivTransaction(
   if (!client.account) throw new Error("Account required")
   if (!client.chain) throw new Error("Chain required")
   const walletClient = client as WalletArkivClient
+  const chain = client.chain
 
   const { creates, updates, deletes, extensions, ownershipChanges } = ops
   const owner = client.account.address as Address
@@ -157,7 +160,7 @@ export async function sendArkivTransaction(
     : 0n
 
   const createdEntityKeys: Hex[] = (creates ?? []).map((_, i) =>
-    deriveEntityKey(client.chain!.id, owner, ownerNonce + BigInt(i)),
+    deriveEntityKey(chain.id, owner, ownerNonce + BigInt(i)),
   )
 
   const operations = [
@@ -258,7 +261,7 @@ export async function sendArkivTransaction(
         message += `: ${error.cause.message}`
       } else {
         message += ": Execution error without revert data"
-      }      
+      }
       logger("%s Detailed error stack: %o", message, error)
     } else if (error instanceof EntityMutationError) {
       throw error
