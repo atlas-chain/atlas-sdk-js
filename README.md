@@ -6,13 +6,13 @@ The Arkiv SDK base strongly on Viem (Viem)[https://github.com/wevm/viem] library
 ## Installation
 
 ```bash
-npm install @arkiv-network/sdk
+npm install @atlas-chain/sdk
 # or
-pnpm install @arkiv-network/sdk
+pnpm install @atlas-chain/sdk
 # or
-bun add @arkiv-network/sdk
+bun add @atlas-chain/sdk
 # or
-yarn add @arkiv-network/sdk
+yarn add @atlas-chain/sdk
 ```
 
 ## Usage
@@ -76,14 +76,14 @@ Modify the `"main"` entry to `"read_example.ts"` and set `"type"` to `"module"` 
 }
 ```
 
-Install `@arkiv-network/sdk` using your preferred package manager:
+Install `@atlas-chain/sdk` using your preferred package manager:
 ```bash
-npm install @arkiv-network/sdk
+npm install @atlas-chain/sdk
 ```
 This command will update your `package.json` with a section like:
 ```json
 "dependencies": {
-  "@arkiv-network/sdk": "^0.6.0"
+  "@atlas-chain/sdk": "^0.6.0"
 }
 ```
 It will also create a `node_modules` directory with all dependencies installed.
@@ -93,9 +93,9 @@ It will also create a `node_modules` directory with all dependencies installed.
 You can now use Arkiv's public client to query data. Paste the following in `read_example.ts`:
 
 ```typescript
-import { createPublicClient, http } from "@arkiv-network/sdk"
-import { braga } from "@arkiv-network/sdk/chains"
-import { eq } from "@arkiv-network/sdk/query"
+import { createPublicClient, http } from "@atlas-chain/sdk"
+import { braga } from "@atlas-chain/sdk/chains"
+import { eq } from "@atlas-chain/sdk/query"
 
 const publicClient = createPublicClient({
   chain: braga, // "braga" is Arkiv's testnet
@@ -170,10 +170,10 @@ Now let's add storage (write) functionality.
 Create a file named `write_example.ts` with the following content:
 
 ```typescript
-import { createPublicClient, createWalletClient, http } from "@arkiv-network/sdk"
-import { privateKeyToAccount } from "@arkiv-network/sdk/accounts"
-import { braga } from "@arkiv-network/sdk/chains"
-import { ExpirationTime, jsonToPayload } from "@arkiv-network/sdk/utils"
+import { createPublicClient, createWalletClient, http } from "@atlas-chain/sdk"
+import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
+import { braga } from "@atlas-chain/sdk/chains"
+import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils"
 
 // Create a public client
 const publicClient = createPublicClient({
@@ -257,17 +257,17 @@ The build uses [tsdown](https://github.com/rolldown/tsdown) to generate both ESM
 
 **Node.js (ESM):**
 ```javascript
-import { createPublicClient } from '@arkiv-network/sdk';  // Uses compiled ESM
+import { createPublicClient } from '@atlas-chain/sdk';  // Uses compiled ESM
 ```
 
 **Node.js (CommonJS):**
 ```javascript
-const { createPublicClient } = require('@arkiv-network/sdk');  // Uses compiled CJS
+const { createPublicClient } = require('@atlas-chain/sdk');  // Uses compiled CJS
 ```
 
 **Bun (TypeScript native):**
 ```javascript
-import { createPublicClient } from '@arkiv-network/sdk'; // Uses *.ts directly
+import { createPublicClient } from '@atlas-chain/sdk'; // Uses *.ts directly
 ```
 
 All formats provide full type safety and IntelliSense support when using TypeScript.

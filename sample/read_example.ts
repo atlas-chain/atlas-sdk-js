@@ -1,6 +1,6 @@
-import { createPublicClient, http } from "@arkiv-network/sdk"
-import { braga } from "@arkiv-network/sdk/chains"
-import { eq } from "@arkiv-network/sdk/query"
+import { createPublicClient, http } from "@atlas-chain/sdk"
+import { braga } from "@atlas-chain/sdk/chains"
+import { eq } from "@atlas-chain/sdk/query"
 
 // Create a public client
 const publicClient = createPublicClient({

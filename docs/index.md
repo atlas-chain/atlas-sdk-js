@@ -1,8 +1,8 @@
-**@arkiv-network/sdk v0.6.7**
+**@atlas-chain/sdk v0.6.9**
 
 ***
 
-# @arkiv-network/sdk v0.6.7
+# @atlas-chain/sdk v0.6.9
 
 ## Modules
 

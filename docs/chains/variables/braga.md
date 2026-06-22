@@ -1,14 +1,14 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [chains](../index.md) / braga
+[@atlas-chain/sdk](../../index.md) / [chains](../index.md) / braga
 
 # Variable: braga
 
 > `const` **braga**: `object`
 
-Defined in: [src/chains/braga.ts:3](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/chains/braga.ts#L3)
+Defined in: [src/chains/braga.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/chains/braga.ts#L3)
 
 ## Type Declaration
 

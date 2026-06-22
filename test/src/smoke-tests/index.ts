@@ -1,5 +1,5 @@
-import { createPublicClient, http } from "@arkiv-network/sdk"
-import { braga } from "@arkiv-network/sdk/chains"
+import { createPublicClient, http } from "@atlas-chain/sdk"
+import { braga } from "@atlas-chain/sdk/chains"
 
 const client = createPublicClient({
   chain: braga,

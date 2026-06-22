@@ -1,14 +1,14 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / Attribute
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / Attribute
 
 # Type Alias: Attribute
 
 > **Attribute** = `object`
 
-Defined in: [src/types/attributes.ts:1](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/attributes.ts#L1)
+Defined in: [src/types/attributes.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L7)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/attributes.ts:1](https://github.com/Arkiv-Network/arkiv-s
 
 > **key**: `string`
 
-Defined in: [src/types/attributes.ts:2](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/attributes.ts#L2)
+Defined in: [src/types/attributes.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L8)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/attributes.ts:2](https://github.com/Arkiv-Network/arkiv-s
 
 > **value**: `string` \| `number`
 
-Defined in: [src/types/attributes.ts:3](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/attributes.ts#L3)
+Defined in: [src/types/attributes.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L9)

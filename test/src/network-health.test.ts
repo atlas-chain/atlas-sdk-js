@@ -3,18 +3,18 @@ import type {
   Hex,
   PublicArkivClient,
   WalletArkivClient,
-} from "@arkiv-network/sdk";
+} from "@atlas-chain/sdk";
 import {
   createPublicClient,
   createWalletClient,
   http,
   isHex,
   NoEntityFoundError,
-} from "@arkiv-network/sdk";
-import { privateKeyToAccount } from "@arkiv-network/sdk/accounts";
-import { kaolin, braga } from "@arkiv-network/sdk/chains";
-import { and, eq, gt, gte, lt, lte, neq, or } from "@arkiv-network/sdk/query";
-import { ExpirationTime, jsonToPayload } from "@arkiv-network/sdk/utils";
+} from "@atlas-chain/sdk";
+import { privateKeyToAccount } from "@atlas-chain/sdk/accounts";
+import { kaolin, braga } from "@atlas-chain/sdk/chains";
+import { and, eq, gt, gte, lt, lte, neq, or } from "@atlas-chain/sdk/query";
+import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils";
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 if (!PRIVATE_KEY) {

@@ -1,14 +1,14 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / RpcOrderByAttribute
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / RpcOrderByAttribute
 
 # Type Alias: RpcOrderByAttribute
 
 > **RpcOrderByAttribute** = `object`
 
-Defined in: [src/types/rpcSchema.ts:19](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L19)
+Defined in: [src/types/rpcSchema.ts:19](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L19)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/rpcSchema.ts:19](https://github.com/Arkiv-Network/arkiv-s
 
 > **desc**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:22](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L22)
+Defined in: [src/types/rpcSchema.ts:22](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L22)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/rpcSchema.ts:22](https://github.com/Arkiv-Network/arkiv-s
 
 > **name**: `string`
 
-Defined in: [src/types/rpcSchema.ts:20](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L20)
+Defined in: [src/types/rpcSchema.ts:20](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L20)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/rpcSchema.ts:20](https://github.com/Arkiv-Network/arkiv-s
 
 > **type**: `"string"` \| `"numeric"`
 
-Defined in: [src/types/rpcSchema.ts:21](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L21)
+Defined in: [src/types/rpcSchema.ts:21](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L21)

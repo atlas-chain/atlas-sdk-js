@@ -1,14 +1,14 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / QueryOptionsOrderBy
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / QueryOptionsOrderBy
 
 # Type Alias: QueryOptionsOrderBy
 
 > **QueryOptionsOrderBy** = `object`
 
-Defined in: [src/actions/public/query.ts:12](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/actions/public/query.ts#L12)
+Defined in: [src/actions/public/query.ts:12](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L12)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/actions/public/query.ts:12](https://github.com/Arkiv-Network/ar
 
 > **desc**: `"asc"` \| `"desc"`
 
-Defined in: [src/actions/public/query.ts:15](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/actions/public/query.ts#L15)
+Defined in: [src/actions/public/query.ts:15](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L15)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/actions/public/query.ts:15](https://github.com/Arkiv-Network/ar
 
 > **name**: `string`
 
-Defined in: [src/actions/public/query.ts:13](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/actions/public/query.ts#L13)
+Defined in: [src/actions/public/query.ts:13](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L13)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/actions/public/query.ts:13](https://github.com/Arkiv-Network/ar
 
 > **type**: `"string"` \| `"numeric"`
 
-Defined in: [src/actions/public/query.ts:14](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/actions/public/query.ts#L14)
+Defined in: [src/actions/public/query.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L14)

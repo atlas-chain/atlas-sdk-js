@@ -1,14 +1,14 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / RpcQueryOptions
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / RpcQueryOptions
 
 # Type Alias: RpcQueryOptions
 
 > **RpcQueryOptions** = `object`
 
-Defined in: [src/types/rpcSchema.ts:25](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L25)
+Defined in: [src/types/rpcSchema.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L25)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/rpcSchema.ts:25](https://github.com/Arkiv-Network/arkiv-s
 
 > `optional` **atBlock**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:26](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L26)
+Defined in: [src/types/rpcSchema.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L26)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/rpcSchema.ts:26](https://github.com/Arkiv-Network/arkiv-s
 
 > `optional` **cursor**: `string`
 
-Defined in: [src/types/rpcSchema.ts:30](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L30)
+Defined in: [src/types/rpcSchema.ts:30](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L30)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/rpcSchema.ts:30](https://github.com/Arkiv-Network/arkiv-s
 
 > `optional` **includeData**: [`RpcIncludeData`](RpcIncludeData.md)
 
-Defined in: [src/types/rpcSchema.ts:27](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L27)
+Defined in: [src/types/rpcSchema.ts:27](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L27)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/rpcSchema.ts:27](https://github.com/Arkiv-Network/arkiv-s
 
 > `optional` **orderBy**: [`RpcOrderByAttribute`](RpcOrderByAttribute.md)[]
 
-Defined in: [src/types/rpcSchema.ts:28](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L28)
+Defined in: [src/types/rpcSchema.ts:28](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L28)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/rpcSchema.ts:28](https://github.com/Arkiv-Network/arkiv-s
 
 > `optional` **resultsPerPage**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:29](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/rpcSchema.ts#L29)
+Defined in: [src/types/rpcSchema.ts:29](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L29)

@@ -1,14 +1,14 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [utils](../index.md) / ExpirationTime
+[@atlas-chain/sdk](../../index.md) / [utils](../index.md) / ExpirationTime
 
 # Variable: ExpirationTime
 
 > `const` **ExpirationTime**: `object`
 
-Defined in: [src/utils/expirationTime.ts:3](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/utils/expirationTime.ts#L3)
+Defined in: [src/utils/expirationTime.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/utils/expirationTime.ts#L3)
 
 ## Type Declaration
 

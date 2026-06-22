@@ -1,14 +1,14 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [query](../index.md) / OrderByAttribute
+[@atlas-chain/sdk](../../index.md) / [query](../index.md) / OrderByAttribute
 
 # Type Alias: OrderByAttribute
 
 > **OrderByAttribute** = `object`
 
-Defined in: [src/query/queryBuilder.ts:9](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/query/queryBuilder.ts#L9)
+Defined in: [src/query/queryBuilder.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryBuilder.ts#L9)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/query/queryBuilder.ts:9](https://github.com/Arkiv-Network/arkiv
 
 > **name**: `string`
 
-Defined in: [src/query/queryBuilder.ts:10](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/query/queryBuilder.ts#L10)
+Defined in: [src/query/queryBuilder.ts:10](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryBuilder.ts#L10)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/query/queryBuilder.ts:10](https://github.com/Arkiv-Network/arki
 
 > **order**: `"asc"` \| `"desc"`
 
-Defined in: [src/query/queryBuilder.ts:12](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/query/queryBuilder.ts#L12)
+Defined in: [src/query/queryBuilder.ts:12](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryBuilder.ts#L12)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/query/queryBuilder.ts:12](https://github.com/Arkiv-Network/arki
 
 > **type**: `"string"` \| `"number"`
 
-Defined in: [src/query/queryBuilder.ts:11](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/query/queryBuilder.ts#L11)
+Defined in: [src/query/queryBuilder.ts:11](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryBuilder.ts#L11)

@@ -81,7 +81,7 @@ Once your PR is merged into `develop`:
 - The package is automatically built and published to NPM
 - Version is automatically managed with a `-dev` postfix (e.g., `0.1.0-dev.0`, `0.1.0-dev.1`)
 - Package is published with the `dev` tag, indicating it's a development version and may be unstable
-- Anyone can install it with: `npm install @arkiv-network/sdk@dev`
+- Anyone can install it with: `npm install @atlas-chain/sdk@dev`
 
 ## Release Process
 

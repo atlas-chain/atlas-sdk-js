@@ -1,7 +1,7 @@
-import { createPublicClient, createWalletClient, http } from "@arkiv-network/sdk"
-import { privateKeyToAccount } from "@arkiv-network/sdk/accounts"
-import { braga } from "@arkiv-network/sdk/chains"
-import { ExpirationTime, jsonToPayload } from "@arkiv-network/sdk/utils"
+import { createPublicClient, createWalletClient, http } from "@atlas-chain/sdk"
+import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
+import { braga } from "@atlas-chain/sdk/chains"
+import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils"
 
 // Create a public client
 const publicClient = createPublicClient({

@@ -1,8 +1,8 @@
-[**@arkiv-network/sdk v0.6.7**](../index.md)
+[**@atlas-chain/sdk v0.6.9**](../index.md)
 
 ***
 
-[@arkiv-network/sdk](../index.md) / chains
+[@atlas-chain/sdk](../index.md) / chains
 
 # chains
 

@@ -9,7 +9,7 @@
   ],
   "entryFileName": "index",
   "readme": "none",
-  "name": "@arkiv-network/sdk",
+  "name": "@atlas-chain/sdk",
   "includeVersion": true,
   "excludePrivate": true,
   "excludeProtected": true,

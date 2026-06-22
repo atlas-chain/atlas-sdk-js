@@ -1,6 +1,6 @@
 {
-  "name": "@arkiv-network/sdk",
-  "version": "0.6.8-dev.0",
+  "name": "@atlas-chain/sdk",
+  "version": "0.6.9",
   "description": "TypeScript client library for Arkiv's blockchains interactions",
   "type": "module",
   "target": "esnext",
@@ -75,15 +75,15 @@
     "test:unit": "bun test src/**/*",
     "docs": "bunx typedoc --plugin typedoc-plugin-markdown",
     "docs:verify": "bunx typedoc --emit none --plugin typedoc-plugin-markdown",
-    "package": "rimraf arkiv-network-sdk-*.tgz && bun run build && bun pm pack --no-cache",
-    "package:test": "bun run package && mv arkiv-network-sdk-*.tgz arkiv-network-sdk-latest.tgz",
-    "prepublishOnly": "bun run build && bun run package && mv arkiv-network-sdk-*.tgz arkiv-network-sdk-latest.tgz",
+    "package": "rimraf atlas-chain-sdk-*.tgz && bun run build && bun pm pack --no-cache",
+    "package:test": "bun run package && mv atlas-chain-sdk-*.tgz atlas-chain-sdk-latest.tgz",
+    "prepublishOnly": "bun run build && bun run package && mv atlas-chain-sdk-*.tgz atlas-chain-sdk-latest.tgz",
     "version:prerelease": "npm version prerelease --preid=dev -m \"chore(release): %s [skip ci]\"",
     "version:release": "npm version --allow-same-version $(node -p \"require('./package.json').version.replace(/-.*$/, '')\") -m \"chore(release): %s [skip ci]\"",
-    "publish-main": "npm publish ./arkiv-network-sdk-latest.tgz --access public",
-    "publish-main:dry": "npm publish ./arkiv-network-sdk-latest.tgz --access public --dry-run",
-    "publish-dev": "npm publish ./arkiv-network-sdk-latest.tgz --access public --tag dev",
-    "publish-dev:dry": "npm publish ./arkiv-network-sdk-latest.tgz --access public --tag dev --dry-run"
+    "publish-main": "npm publish ./atlas-chain-sdk-latest.tgz --access public",
+    "publish-main:dry": "npm publish ./atlas-chain-sdk-latest.tgz --access public --dry-run",
+    "publish-dev": "npm publish ./atlas-chain-sdk-latest.tgz --access public --tag dev",
+    "publish-dev:dry": "npm publish ./atlas-chain-sdk-latest.tgz --access public --tag dev --dry-run"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",

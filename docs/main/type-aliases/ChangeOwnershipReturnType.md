@@ -1,16 +1,16 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / ChangeOwnershipReturnType
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / ChangeOwnershipReturnType
 
 # Type Alias: ChangeOwnershipReturnType
 
 > **ChangeOwnershipReturnType** = `object`
 
-Defined in: [src/actions/wallet/changeOwnership.ts:23](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/actions/wallet/changeOwnership.ts#L23)
+Defined in: [src/actions/wallet/changeOwnership.ts:24](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/changeOwnership.ts#L24)
 
-Return type for the deleteEntity function.
+Return type for the changeOwnership function.
 - entityKey: The key of the entity.
 - txHash: The transaction hash.
 
@@ -20,7 +20,7 @@ Return type for the deleteEntity function.
 
 > **entityKey**: `Hex`
 
-Defined in: [src/actions/wallet/changeOwnership.ts:24](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/actions/wallet/changeOwnership.ts#L24)
+Defined in: [src/actions/wallet/changeOwnership.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/changeOwnership.ts#L25)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [src/actions/wallet/changeOwnership.ts:24](https://github.com/Arkiv-
 
 > **txHash**: `string`
 
-Defined in: [src/actions/wallet/changeOwnership.ts:25](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/actions/wallet/changeOwnership.ts#L25)
+Defined in: [src/actions/wallet/changeOwnership.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/changeOwnership.ts#L26)

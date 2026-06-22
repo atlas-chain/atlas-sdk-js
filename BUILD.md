@@ -36,7 +36,7 @@ bun run type-check
 
 # Package for distribution
 bun run package
-bun run package:test  # Creates arkiv-network-sdk-latest.tgz for testing
+bun run package:test  # Creates atlas-chain-sdk-latest.tgz for testing
 ```
 
 ## Package Exports
@@ -77,18 +77,18 @@ Each export provides **3 resolution paths**:
 
 **Bun (TypeScript native):**
 ```javascript
-import { createPublicClient } from '@arkiv-network/sdk';  // Uses src/*.ts directly
+import { createPublicClient } from '@atlas-chain/sdk';  // Uses src/*.ts directly
 ```
 Bun automatically resolves to the `bun` export condition, which points to TypeScript source files. No transpilation needed!
 
 **Node.js (ESM):**
 ```javascript
-import { createPublicClient } from '@arkiv-network/sdk';  // Uses dist/*.js
+import { createPublicClient } from '@atlas-chain/sdk';  // Uses dist/*.js
 ```
 
 **Node.js (CommonJS):**
 ```javascript
-const { createPublicClient } = require('@arkiv-network/sdk');  // Uses dist/*.cjs
+const { createPublicClient } = require('@atlas-chain/sdk');  // Uses dist/*.cjs
 ```
 
 ## Why tsdown?

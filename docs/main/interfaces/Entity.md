@@ -1,12 +1,12 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / Entity
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / Entity
 
 # Interface: Entity
 
-Defined in: [src/types/entity.ts:5](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L5)
+Defined in: [src/types/entity.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L14)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/entity.ts:5](https://github.com/Arkiv-Network/arkiv-sdk-j
 
 > **attributes**: [`Attribute`](../type-aliases/Attribute.md)[]
 
-Defined in: [src/types/entity.ts:16](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L16)
+Defined in: [src/types/entity.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L25)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/entity.ts:16](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **contentType**: [`MimeType`](../type-aliases/MimeType.md) \| `undefined`
 
-Defined in: [src/types/entity.ts:7](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L7)
+Defined in: [src/types/entity.ts:16](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L16)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/types/entity.ts:7](https://github.com/Arkiv-Network/arkiv-sdk-j
 
 > **createdAtBlock**: `bigint` \| `undefined`
 
-Defined in: [src/types/entity.ts:11](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L11)
+Defined in: [src/types/entity.ts:20](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L20)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/entity.ts:11](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **creator**: `` `0x${string}` `` \| `undefined`
 
-Defined in: [src/types/entity.ts:9](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L9)
+Defined in: [src/types/entity.ts:18](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L18)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/types/entity.ts:9](https://github.com/Arkiv-Network/arkiv-sdk-j
 
 > **expiresAtBlock**: `bigint` \| `undefined`
 
-Defined in: [src/types/entity.ts:10](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L10)
+Defined in: [src/types/entity.ts:19](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L19)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/types/entity.ts:10](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **key**: `` `0x${string}` ``
 
-Defined in: [src/types/entity.ts:6](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L6)
+Defined in: [src/types/entity.ts:15](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L15)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/types/entity.ts:6](https://github.com/Arkiv-Network/arkiv-sdk-j
 
 > **lastModifiedAtBlock**: `bigint` \| `undefined`
 
-Defined in: [src/types/entity.ts:12](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L12)
+Defined in: [src/types/entity.ts:21](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L21)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [src/types/entity.ts:12](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **operationIndexInTransaction**: `bigint` \| `undefined`
 
-Defined in: [src/types/entity.ts:14](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L14)
+Defined in: [src/types/entity.ts:23](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L23)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [src/types/entity.ts:14](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **owner**: `` `0x${string}` `` \| `undefined`
 
-Defined in: [src/types/entity.ts:8](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L8)
+Defined in: [src/types/entity.ts:17](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L17)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [src/types/entity.ts:8](https://github.com/Arkiv-Network/arkiv-sdk-j
 
 > **payload**: `Uint8Array`\<`ArrayBufferLike`\> \| `undefined`
 
-Defined in: [src/types/entity.ts:15](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L15)
+Defined in: [src/types/entity.ts:24](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L24)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [src/types/entity.ts:15](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **transactionIndexInBlock**: `bigint` \| `undefined`
 
-Defined in: [src/types/entity.ts:13](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L13)
+Defined in: [src/types/entity.ts:22](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L22)
 
 ## Methods
 
@@ -102,7 +102,7 @@ Defined in: [src/types/entity.ts:13](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **toJson**(): `any`
 
-Defined in: [src/types/entity.ts:72](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L72)
+Defined in: [src/types/entity.ts:81](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L81)
 
 Parses the entity payload as JSON and returns the resulting object.
 Throws an error if the payload is undefined, which may occur if the entity was not queried with the withPayload option.
@@ -120,7 +120,7 @@ The parsed JSON object from the entity payload.
 
 > **toText**(): `string`
 
-Defined in: [src/types/entity.ts:50](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/entity.ts#L50)
+Defined in: [src/types/entity.ts:59](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L59)
 
 Converts the entity payload from bytes to a string and returns it.
 Throws an error if the payload is undefined, which may occur if the entity was not queried with the withPayload option.

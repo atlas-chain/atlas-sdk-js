@@ -1,35 +1,35 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / OnEntityOwnerChangedEvent
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / OnEntityOwnerChangedEvent
 
 # Type Alias: OnEntityOwnerChangedEvent
 
 > **OnEntityOwnerChangedEvent** = `object`
 
-Defined in: [src/types/events.ts:36](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L36)
+Defined in: [src/types/events.ts:34](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L34)
 
 ## Properties
+
+### entityHash
+
+> **entityHash**: `Hex`
+
+Defined in: [src/types/events.ts:37](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L37)
+
+***
 
 ### entityKey
 
 > **entityKey**: `Hex`
 
-Defined in: [src/types/events.ts:37](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L37)
+Defined in: [src/types/events.ts:35](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L35)
 
 ***
 
-### newOwner
+### owner
 
-> **newOwner**: `Hex`
+> **owner**: `Address`
 
-Defined in: [src/types/events.ts:39](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L39)
-
-***
-
-### oldOwner
-
-> **oldOwner**: `Hex`
-
-Defined in: [src/types/events.ts:38](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L38)
+Defined in: [src/types/events.ts:36](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L36)

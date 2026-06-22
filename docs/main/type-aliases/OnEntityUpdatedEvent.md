@@ -1,22 +1,22 @@
-[**@arkiv-network/sdk v0.6.7**](../../index.md)
+[**@atlas-chain/sdk v0.6.9**](../../index.md)
 
 ***
 
-[@arkiv-network/sdk](../../index.md) / [main](../index.md) / OnEntityUpdatedEvent
+[@atlas-chain/sdk](../../index.md) / [main](../index.md) / OnEntityUpdatedEvent
 
 # Type Alias: OnEntityUpdatedEvent
 
 > **OnEntityUpdatedEvent** = `object`
 
-Defined in: [src/types/events.ts:10](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L10)
+Defined in: [src/types/events.ts:10](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L10)
 
 ## Properties
 
-### cost
+### entityHash
 
-> **cost**: `bigint`
+> **entityHash**: `Hex`
 
-Defined in: [src/types/events.ts:15](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L15)
+Defined in: [src/types/events.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L14)
 
 ***
 
@@ -24,28 +24,20 @@ Defined in: [src/types/events.ts:15](https://github.com/Arkiv-Network/arkiv-sdk-
 
 > **entityKey**: `Hex`
 
-Defined in: [src/types/events.ts:11](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L11)
+Defined in: [src/types/events.ts:11](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L11)
 
 ***
 
-### newExpirationBlock
+### expiresAt
 
-> **newExpirationBlock**: `number`
+> **expiresAt**: `number`
 
-Defined in: [src/types/events.ts:14](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L14)
-
-***
-
-### oldExpirationBlock
-
-> **oldExpirationBlock**: `number`
-
-Defined in: [src/types/events.ts:13](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L13)
+Defined in: [src/types/events.ts:13](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L13)
 
 ***
 
 ### owner
 
-> **owner**: `Hex`
+> **owner**: `Address`
 
-Defined in: [src/types/events.ts:12](https://github.com/Arkiv-Network/arkiv-sdk-js/blob/43e079f620d2ee06236e15bdaccf1497199dca0b/src/types/events.ts#L12)
+Defined in: [src/types/events.ts:12](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L12)

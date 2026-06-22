@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test"
-import type { Hex, PublicArkivClient, WalletArkivClient } from "@arkiv-network/sdk"
+import type { Hex, PublicArkivClient, WalletArkivClient } from "@atlas-chain/sdk"
 import {
   createPublicClient,
   createWalletClient,
@@ -7,10 +7,10 @@ import {
   NoEntityFoundError,
   toBytes,
   webSocket,
-} from "@arkiv-network/sdk"
-import { privateKeyToAccount } from "@arkiv-network/sdk/accounts"
-import { and, asc, desc, eq, gt, gte, lt, lte, or } from "@arkiv-network/sdk/query"
-import { ExpirationTime, jsonToPayload } from "@arkiv-network/sdk/utils"
+} from "@atlas-chain/sdk"
+import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
+import { and, asc, desc, eq, gt, gte, lt, lte, or } from "@atlas-chain/sdk/query"
+import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils"
 import type { StartedTestContainer } from "testcontainers"
 import { execCommand, launchLocalArkivNode } from "./utils.js"
 

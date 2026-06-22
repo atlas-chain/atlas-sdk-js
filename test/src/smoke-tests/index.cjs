@@ -1,5 +1,5 @@
-const { createPublicClient, http } = require("@arkiv-network/sdk")
-const { braga } = require("@arkiv-network/sdk/chains")
+const { createPublicClient, http } = require("@atlas-chain/sdk")
+const { braga } = require("@atlas-chain/sdk/chains")
 
 const client = createPublicClient({
   chain: braga,

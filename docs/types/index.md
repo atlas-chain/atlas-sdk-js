@@ -1,8 +1,8 @@
-[**@arkiv-network/sdk v0.6.7**](../index.md)
+[**@atlas-chain/sdk v0.6.9**](../index.md)
 
 ***
 
-[@arkiv-network/sdk](../index.md) / types
+[@atlas-chain/sdk](../index.md) / types
 
 # types
 
@@ -17,6 +17,12 @@ Re-exports [ArkivRpcSchema](../main/type-aliases/ArkivRpcSchema.md)
 ### Attribute
 
 Re-exports [Attribute](../main/type-aliases/Attribute.md)
+
+***
+
+### AttributeValueType
+
+Re-exports [AttributeValueType](../main/enumerations/AttributeValueType.md)
 
 ***
 
@@ -59,6 +65,12 @@ Re-exports [DeleteEntityReturnType](../main/type-aliases/DeleteEntityReturnType.
 ### Entity
 
 Re-exports [Entity](../main/interfaces/Entity.md)
+
+***
+
+### EntityOperationType
+
+Re-exports [EntityOperationType](../main/enumerations/EntityOperationType.md)
 
 ***
 

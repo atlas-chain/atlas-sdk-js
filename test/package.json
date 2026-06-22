@@ -19,6 +19,6 @@
     "refresh": "cd .. && bun run package && cd test && bun install --force"
   },
   "dependencies": {
-    "@arkiv-network/sdk": "file:../arkiv-network-sdk-latest.tgz"
+    "@atlas-chain/sdk": "file:../atlas-chain-sdk-latest.tgz"
   }
 }
