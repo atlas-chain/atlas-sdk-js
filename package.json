@@ -114,7 +114,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Arkiv-Network/arkiv-sdk-js.git"
+    "url": "https://github.com/atlas-chain/atlas-sdk-js.git"
   },
   "homepage": "https://arkiv.network",
   "dependencies": {
