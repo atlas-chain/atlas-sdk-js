@@ -164,14 +164,25 @@ jobs:
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
         run: |
           echo "=== Publishing package ==="
+          if [ -z "$NPM_ACCESS_TOKEN" ]; then
+            echo "NPM_ACCESS_TOKEN is empty or unavailable to this workflow"
+            exit 1
+          fi
+          echo "NPM_ACCESS_TOKEN is present"
           npmrc="$(mktemp)"
-          printf 'registry=https://registry.npmjs.org/\n//registry.npmjs.org/:_authToken=%s\n' "$NPM_ACCESS_TOKEN" > "$npmrc"
-          if ! BUN_CONFIG_NPMRC="$npmrc" NPM_CONFIG_USERCONFIG="$npmrc" bun publish --access public ./atlas-chain-sdk-latest.tgz 2>&1; then
+          printf '@atlas-chain:registry=https://registry.npmjs.org/\nregistry=https://registry.npmjs.org/\n//registry.npmjs.org/:_authToken=%s\n' "$NPM_ACCESS_TOKEN" > "$npmrc"
+          echo "Authenticated npm user:"
+          BUN_CONFIG_NPMRC="$npmrc" NPM_CONFIG_USERCONFIG="$npmrc" bun pm whoami
+          set +e
+          BUN_CONFIG_NPMRC="$npmrc" NPM_CONFIG_USERCONFIG="$npmrc" bun publish --access public ./atlas-chain-sdk-latest.tgz 2>&1
+          publish_status=$?
+          set -e
+          if [ "$publish_status" -ne 0 ]; then
             echo "=== PUBLISH FAILED ==="
-            echo "Exit code: $?"
+            echo "Exit code: $publish_status"
             echo "=== Full output (stdout + stderr) ==="
             rm -f "$npmrc"
-            exit 1
+            exit "$publish_status"
           fi
           rm -f "$npmrc"
 
