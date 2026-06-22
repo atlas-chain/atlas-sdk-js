@@ -34,6 +34,9 @@ if (!chain) {
   );
 }
 
+const HEALTH_CHECK_URL =
+  process.env.HEALTH_CHECK_URL ?? "https://atlas.arkiv-global.net/";
+
 const account = privateKeyToAccount(PRIVATE_KEY);
 
 const publicClient: PublicArkivClient = createPublicClient({
@@ -48,6 +51,15 @@ const walletClient: WalletArkivClient = createWalletClient({
 });
 
 describe(`Network health check (${chain.name})`, () => {
+  test(
+    "Atlas health endpoint is reachable",
+    async () => {
+      const response = await fetch(HEALTH_CHECK_URL);
+      expect(response.ok).toBe(true);
+    },
+    { timeout: 30_000 },
+  );
+
   test(
     "chain is reachable - getChainId & getBlockNumber",
     async () => {
