@@ -33,6 +33,12 @@
       "require": "./dist/query/index.cjs",
       "default": "./dist/query/index.js"
     },
+    "./payloadProvider": {
+      "bun": "./src/payloadProvider/index.ts",
+      "import": "./dist/payloadProvider/index.js",
+      "require": "./dist/payloadProvider/index.cjs",
+      "default": "./dist/payloadProvider/index.js"
+    },
     "./types": {
       "bun": "./src/types/index.ts",
       "import": "./dist/types/index.js",

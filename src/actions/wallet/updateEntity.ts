@@ -1,5 +1,6 @@
 import type { Hash, Hex } from "viem"
 import type { ArkivClient } from "../../clients/baseClient"
+import type { PayloadProviderSubmission } from "../../payloadProvider"
 import type { Attribute, MimeType, TxParams } from "../../types"
 import { sendArkivTransaction } from "../../utils/arkivTransactions"
 import { getLogger } from "../../utils/logger"
@@ -30,6 +31,7 @@ export type UpdateEntityParameters = {
 export type UpdateEntityReturnType = {
   entityKey: Hex
   txHash: Hash
+  payloadReceipt?: PayloadProviderSubmission
 }
 
 export async function updateEntity(
@@ -38,12 +40,19 @@ export async function updateEntity(
   txParams?: TxParams,
 ): Promise<UpdateEntityReturnType> {
   logger("updateEntity %o", data)
-  const { receipt } = await sendArkivTransaction(client, { updates: [data] }, txParams)
+  const { receipt, payloadReceipts } = await sendArkivTransaction(
+    client,
+    { updates: [data] },
+    txParams,
+  )
 
   logger("Receipt from updateEntity %o", receipt)
 
-  return {
+  const result: UpdateEntityReturnType = {
     txHash: receipt.transactionHash as Hash,
     entityKey: data.entityKey,
   }
+  if (payloadReceipts[0]) result.payloadReceipt = payloadReceipts[0]
+
+  return result
 }

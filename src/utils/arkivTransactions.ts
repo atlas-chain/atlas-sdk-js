@@ -20,6 +20,13 @@ import type { ArkivClient } from "../clients/baseClient"
 import type { WalletArkivClient } from "../clients/createWalletClient"
 import { ARKIV_ADDRESS, BLOCK_TIME } from "../consts"
 import { EntityMutationError } from "../errors"
+import {
+  getPayloadProviderConfig,
+  PayloadProviderClient,
+  type PayloadProviderSubmission,
+  verifyPayloadMetadata,
+  verifyPayloadProviderSignature,
+} from "../payloadProvider"
 import type { TxParams } from "../types"
 import { AttributeValueType } from "../types/attributes"
 import { EntityOperationType } from "../types/entity"
@@ -127,6 +134,16 @@ function deriveEntityKey(chainId: number, owner: Address, nonce: bigint): Hex {
 export type SendArkivTransactionResult = {
   receipt: TransactionReceipt
   createdEntityKeys: Hex[]
+  payloadReceipts: PayloadProviderSubmission[]
+}
+
+type PayloadProviderJob = {
+  operation: "create" | "update"
+  entityKey: Hex
+  payload: Uint8Array
+  contentType: string
+  attributes: { key: string; value: string | number }[]
+  expiresIn: number
 }
 
 export async function sendArkivTransaction(
@@ -162,6 +179,25 @@ export async function sendArkivTransaction(
   const createdEntityKeys: Hex[] = (creates ?? []).map((_, i) =>
     deriveEntityKey(chain.id, owner, ownerNonce + BigInt(i)),
   )
+
+  const payloadReceipts = await submitPayloadsToProviderIfConfigured(client, [
+    ...(creates ?? []).map((item, i) => ({
+      operation: "create" as const,
+      entityKey: createdEntityKeys[i],
+      payload: item.payload,
+      contentType: item.contentType,
+      attributes: item.attributes,
+      expiresIn: item.expiresIn,
+    })),
+    ...(updates ?? []).map((item) => ({
+      operation: "update" as const,
+      entityKey: item.entityKey,
+      payload: item.payload,
+      contentType: item.contentType,
+      attributes: item.attributes,
+      expiresIn: item.expiresIn,
+    })),
+  ])
 
   const operations = [
     ...(creates ?? []).map((item, i) => ({
@@ -250,7 +286,7 @@ export async function sendArkivTransaction(
       )
     }
 
-    return { receipt, createdEntityKeys }
+    return { receipt, createdEntityKeys, payloadReceipts }
   } catch (error) {
     let message = "Transaction failed"
     if (error instanceof TransactionExecutionError) {
@@ -269,4 +305,61 @@ export async function sendArkivTransaction(
 
     throw new EntityMutationError(message)
   }
+}
+
+async function submitPayloadsToProviderIfConfigured(
+  client: ArkivClient,
+  jobs: PayloadProviderJob[],
+): Promise<PayloadProviderSubmission[]> {
+  const config = getPayloadProviderConfig(client)
+  if (!config || jobs.length === 0) return []
+
+  const provider = new PayloadProviderClient(config)
+
+  return Promise.all(
+    jobs.map(async (job) => {
+      const response = await provider.submitArkivPayload({
+        namespace: config.namespace,
+        payload: job.payload,
+        contentType: job.contentType,
+        attributes: job.attributes,
+        expiresIn: job.expiresIn,
+        entityKey: job.entityKey,
+      })
+
+      const metadataErrors = verifyPayloadMetadata(config.namespace, job.payload, response.payload)
+      if (metadataErrors.length) {
+        throw new Error(`Payload provider response mismatch: ${metadataErrors.join("; ")}`)
+      }
+
+      let verification: PayloadProviderSubmission["verification"]
+      if (config.verifyReceipt) {
+        if (!response.payload.signature) {
+          throw new Error("Payload provider response did not include a receipt signature")
+        }
+
+        verification = await verifyPayloadProviderSignature(
+          response.payload,
+          response.payload.signature,
+        )
+        if (!verification.valid) {
+          throw new Error(
+            `Payload provider receipt verification failed: ${verification.errors.join("; ")}`,
+          )
+        }
+      }
+
+      const submission: PayloadProviderSubmission = {
+        operation: job.operation,
+        entityKey: job.entityKey,
+        providerUrl: provider.url,
+        created: response.created,
+        arkiv: response.arkiv,
+        payload: response.payload,
+      }
+      if (verification) submission.verification = verification
+
+      return submission
+    }),
+  )
 }
