@@ -1,5 +1,6 @@
 import type { Hash, Hex } from "viem"
 import type { ArkivClient } from "../../clients/baseClient"
+import type { PayloadProviderSubmission } from "../../payloadProvider"
 import type { TxParams } from "../../types"
 import { sendArkivTransaction } from "../../utils/arkivTransactions"
 import { getLogger } from "../../utils/logger"
@@ -42,6 +43,7 @@ export type MutateEntitiesReturnType = {
   deletedEntities: Hex[]
   extendedEntities: Hex[]
   ownershipChanges: Hex[]
+  payloadReceipts?: PayloadProviderSubmission[]
 }
 
 export async function mutateEntities(
@@ -53,11 +55,15 @@ export async function mutateEntities(
     throw new Error("No operations to perform")
   }
 
-  const { receipt, createdEntityKeys } = await sendArkivTransaction(client, data, txParams)
+  const { receipt, createdEntityKeys, payloadReceipts } = await sendArkivTransaction(
+    client,
+    data,
+    txParams,
+  )
 
   logger("Receipt from mutateEntities %o", receipt)
 
-  return {
+  const result: MutateEntitiesReturnType = {
     txHash: receipt.transactionHash as Hash,
     createdEntities: createdEntityKeys,
     updatedEntities: (data.updates ?? []).map((u) => u.entityKey),
@@ -65,4 +71,7 @@ export async function mutateEntities(
     extendedEntities: (data.extensions ?? []).map((e) => e.entityKey),
     ownershipChanges: (data.ownershipChanges ?? []).map((o) => o.entityKey),
   }
+  if (payloadReceipts.length) result.payloadReceipts = payloadReceipts
+
+  return result
 }

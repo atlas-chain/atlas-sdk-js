@@ -10,6 +10,8 @@ import type {
   WalletClientConfig,
 } from "viem"
 import { createClient, publicActions, walletActions } from "viem"
+import { setPayloadProviderConfig } from "../payloadProvider/config"
+import type { PayloadProviderConfig } from "../payloadProvider/types"
 import type { ArkivRpcSchema } from "../types/rpcSchema"
 import { type WalletArkivActions, walletArkivActions } from "./decorators/arkivWallet"
 
@@ -21,6 +23,15 @@ export type WalletArkivClient<
 > = Prettify<
   Client<transport, chain, account, rpcSchema, WalletArkivActions<transport, chain, account>>
 >
+
+export type WalletArkivClientConfig<
+  transport extends Transport,
+  chain extends Chain | undefined = undefined,
+  accountOrAddress extends Account | Address | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = ArkivRpcSchema,
+> = WalletClientConfig<transport, chain, accountOrAddress, rpcSchema> & {
+  payloadProvider?: PayloadProviderConfig | false
+}
 
 /**
  * Creates a Public Client with a given [Transport](https://viem.sh/docs/clients/intro) configured for a [Chain](https://viem.sh/docs/clients/chains).
@@ -47,22 +58,34 @@ export function createWalletClient<
   accountOrAddress extends Account | Address | undefined = undefined,
   rpcSchema extends RpcSchema | undefined = ArkivRpcSchema,
 >(
-  parameters: WalletClientConfig<transport, chain, accountOrAddress, rpcSchema>,
+  parameters: WalletArkivClientConfig<transport, chain, accountOrAddress, rpcSchema>,
 ): WalletArkivClient<transport, chain, ParseAccount<accountOrAddress>, rpcSchema> {
-  const { key = "wallet", name = "Wallet Client" } = parameters
+  const {
+    key = "wallet",
+    name = "Wallet Client",
+    payloadProvider,
+    ...clientParameters
+  } = parameters
   const client = createClient({
-    ...parameters,
+    ...clientParameters,
     key,
     name,
   })
+  setPayloadProviderConfig(client, payloadProvider)
 
-  return client
-    .extend(publicActions)
-    .extend(walletActions)
-    .extend(walletArkivActions) as unknown as WalletArkivClient<
+  const publicClient = client.extend(publicActions)
+  setPayloadProviderConfig(publicClient, payloadProvider)
+
+  const walletClient = publicClient.extend(walletActions)
+  setPayloadProviderConfig(walletClient, payloadProvider)
+
+  const arkivClient = walletClient.extend(walletArkivActions) as unknown as WalletArkivClient<
     transport,
     chain,
     ParseAccount<accountOrAddress>,
     rpcSchema
   >
+  setPayloadProviderConfig(arkivClient, payloadProvider)
+
+  return arkivClient
 }

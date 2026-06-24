@@ -17,6 +17,20 @@ export type {
   MutateEntitiesReturnType,
 } from "../actions/wallet/mutateEntities"
 export type { UpdateEntityParameters, UpdateEntityReturnType } from "../actions/wallet/updateEntity"
+export type {
+  PayloadProviderArkivContext,
+  PayloadProviderConfig,
+  PayloadProviderMetadata,
+  PayloadProviderOperation,
+  PayloadProviderReceipt,
+  PayloadProviderSignature,
+  PayloadProviderSubmission,
+  PayloadProviderVerificationContext,
+  PayloadProviderVerificationResult,
+  PayloadReference,
+  SubmitArkivPayloadInput,
+  SubmitArkivPayloadResponse,
+} from "../payloadProvider"
 export type { Attribute } from "./attributes"
 export { AttributeValueType } from "./attributes"
 export type { Entity } from "./entity"
