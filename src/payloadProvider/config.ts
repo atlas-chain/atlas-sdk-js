@@ -6,7 +6,7 @@ export type NormalizedPayloadProviderConfig = {
   url: string
   namespace: string
   verifyReceipt: boolean
-  transactionPayload: "inline"
+  transactionPayload: "inline" | "reference"
   bearerKey?: string
   fetch?: typeof fetch
 }
@@ -39,9 +39,9 @@ function normalizePayloadProviderConfig(
     throw new Error("payloadProvider.url must not be empty")
   }
 
-  const transactionPayload = config.transactionPayload ?? "inline"
-  if (transactionPayload !== "inline") {
-    throw new Error("payloadProvider.transactionPayload currently supports only 'inline'")
+  const transactionPayload = config.transactionPayload ?? "reference"
+  if (transactionPayload !== "inline" && transactionPayload !== "reference") {
+    throw new Error("payloadProvider.transactionPayload must be 'inline' or 'reference'")
   }
 
   const normalized: NormalizedPayloadProviderConfig = {

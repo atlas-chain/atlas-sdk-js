@@ -8,7 +8,7 @@ export type PayloadProviderConfig = {
   namespace?: string
   verifyReceipt?: boolean
   fetch?: typeof fetch
-  transactionPayload?: "inline"
+  transactionPayload?: "inline" | "reference"
 }
 
 export type PayloadProviderReceipt = {
@@ -19,6 +19,8 @@ export type PayloadProviderReceipt = {
   checksum: string
   sizeBytes: number
   submittedAt: string
+  nonce?: Hex
+  payment?: number
 }
 
 export type PayloadProviderSignature = {
@@ -49,6 +51,8 @@ export type PayloadProviderArkivContext = {
   attributes: Attribute[]
   expiresIn?: number
   entityKey?: Hex
+  nonce?: Hex
+  payment?: number
 }
 
 export type SubmitArkivPayloadInput = {
@@ -58,6 +62,8 @@ export type SubmitArkivPayloadInput = {
   attributes: Attribute[]
   expiresIn: number
   entityKey: Hex
+  nonce?: Hex
+  payment?: number
 }
 
 export type SubmitArkivPayloadResponse = {
@@ -75,6 +81,26 @@ export type PayloadProviderVerificationResult = {
   errors: string[]
 }
 
+export type PayloadProviderVerificationContext = {
+  nonce?: Hex
+  payment?: number
+}
+
+export type PayloadReference = {
+  kind: "atlas.payloadReference"
+  version: 1
+  provider: "atlas-payload-provider"
+  id: string
+  namespace: string
+  contentType?: MimeType | string
+  checksum: string
+  sizeBytes: number
+  submittedAt: string
+  nonce: Hex
+  payment: number
+  signature: PayloadProviderSignature
+}
+
 export type PayloadProviderOperation = "create" | "update"
 
 export type PayloadProviderSubmission = {
@@ -84,5 +110,8 @@ export type PayloadProviderSubmission = {
   created: boolean
   arkiv: PayloadProviderArkivContext
   payload: PayloadProviderMetadata
+  nonce: Hex
+  payment: number
+  reference?: PayloadReference
   verification?: PayloadProviderVerificationResult
 }

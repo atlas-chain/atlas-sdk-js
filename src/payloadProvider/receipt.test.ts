@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { hashMessage, parseSignature } from "viem"
+import { type Hex, hashMessage, parseSignature } from "viem"
 import { privateKeyToAccount } from "viem/accounts"
 import { canonicalizePayloadReceipt, verifyPayloadProviderSignature } from "./receipt"
 import type {
@@ -21,6 +21,8 @@ describe("payload provider receipt verification", () => {
       checksum: `sha256:${"b".repeat(64)}`,
       sizeBytes: 12,
       submittedAt: "2026-06-24T00:00:00Z",
+      nonce: `0x${"1".repeat(64)}` as Hex,
+      payment: 100_000,
     }
     const meta: PayloadProviderMetadata = {
       id: receipt.payloadId,
@@ -49,7 +51,10 @@ describe("payload provider receipt verification", () => {
       v,
     }
 
-    const result = await verifyPayloadProviderSignature(meta, signature)
+    const result = await verifyPayloadProviderSignature(meta, signature, {
+      nonce: receipt.nonce,
+      payment: receipt.payment,
+    })
 
     expect(result.valid).toBe(true)
     expect(result.recoveredAddress?.toLowerCase()).toBe(account.address.toLowerCase())

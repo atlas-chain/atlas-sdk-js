@@ -23,7 +23,9 @@ import { EntityMutationError } from "../errors"
 import {
   getPayloadProviderConfig,
   PayloadProviderClient,
+  type PayloadProviderOperation,
   type PayloadProviderSubmission,
+  type PayloadReference,
   verifyPayloadMetadata,
   verifyPayloadProviderSignature,
 } from "../payloadProvider"
@@ -33,6 +35,7 @@ import { EntityOperationType } from "../types/entity"
 import { getLogger } from "./logger"
 
 const logger = getLogger("utils:arkiv-transactions")
+const textEncoder = new TextEncoder()
 
 // Mime128 = struct { bytes32[4] data }  (128-byte fixed MIME type container)
 // Attribute = struct { bytes32 name, uint8 valueType, bytes32[4] value }
@@ -66,6 +69,15 @@ export const ENTITY_ERRORS_ABI = parseAbi([
   "error MimeTooLong(uint256 length, uint256 maxLength)",
   "error MimeInvalidByte(uint256 position, bytes1 value)",
   "error MimeIncomplete()",
+  "error PayloadReferenceMalformed()",
+  "error PayloadReferenceUnsupportedVersion(uint256 version)",
+  "error PayloadProviderUnknown(string provider)",
+  "error PayloadProviderSignerNotAllowed(address signer)",
+  "error PayloadProviderReceiptMismatch()",
+  "error PayloadProviderSignatureInvalid()",
+  "error PayloadReferenceContentTypeInvalid(bytes contentType)",
+  "error PayloadReferenceNonceUsed(bytes32 nonce)",
+  "error PayloadReferencePaymentInvalid(uint256 payment)",
 ])
 
 const EXECUTE_ABI = [...ENTITY_EXECUTE_ABI, ...ENTITY_ERRORS_ABI]
@@ -75,6 +87,8 @@ const ENTITY_NONCE_ABI = parseAbi(["function nonces(address owner) view returns 
 const ZERO_ADDRESS: Address = "0x0000000000000000000000000000000000000000"
 const ZERO_32 = `0x${"00".repeat(32)}` as Hex
 const EMPTY_BYTES128 = [ZERO_32, ZERO_32, ZERO_32, ZERO_32] as const
+export const PAYLOAD_REFERENCE_CONTENT_TYPE = "application/vnd.atlas.payload-reference+json"
+export const PAYLOAD_REFERENCE_PAYMENT = 100_000
 
 // Encode a string or bytes into a bytes32[4] (128-byte) container, left-aligned.
 function encodeBytes128(data: Uint8Array): readonly [Hex, Hex, Hex, Hex] {
@@ -131,6 +145,52 @@ function deriveEntityKey(chainId: number, owner: Address, nonce: bigint): Hex {
   )
 }
 
+function randomPayloadReferenceNonce(): Hex {
+  const crypto = globalThis.crypto
+  if (!crypto?.getRandomValues) {
+    throw new Error("payload provider reference mode requires crypto.getRandomValues")
+  }
+
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const bytes = new Uint8Array(32)
+    crypto.getRandomValues(bytes)
+    if (bytes.some((byte) => byte !== 0)) return toHex(bytes)
+  }
+
+  throw new Error("failed to generate a non-zero payload reference nonce")
+}
+
+function payloadReceiptKey(operation: PayloadProviderOperation, entityKey: Hex): string {
+  return `${operation}:${entityKey.toLowerCase()}`
+}
+
+function buildPayloadReference(submission: PayloadProviderSubmission): PayloadReference {
+  const signature = submission.payload.signature
+  if (!signature) {
+    throw new Error("Payload provider reference mode requires a receipt signature")
+  }
+
+  const reference: PayloadReference = {
+    kind: "atlas.payloadReference",
+    version: 1,
+    provider: "atlas-payload-provider",
+    id: submission.payload.id,
+    namespace: submission.payload.namespace,
+    ...(submission.payload.contentType ? { contentType: submission.payload.contentType } : {}),
+    checksum: submission.payload.checksum,
+    sizeBytes: submission.payload.sizeBytes,
+    submittedAt: submission.payload.submittedAt,
+    nonce: submission.nonce,
+    payment: submission.payment,
+    signature,
+  }
+  return reference
+}
+
+function referencePayloadHex(reference: PayloadReference): Hex {
+  return toHex(textEncoder.encode(JSON.stringify(reference)))
+}
+
 export type SendArkivTransactionResult = {
   receipt: TransactionReceipt
   createdEntityKeys: Hex[]
@@ -164,6 +224,7 @@ export async function sendArkivTransaction(
 
   const { creates, updates, deletes, extensions, ownershipChanges } = ops
   const owner = client.account.address as Address
+  const payloadProviderConfig = getPayloadProviderConfig(client)
 
   const ownerNonce: bigint = creates?.length
     ? BigInt(
@@ -198,26 +259,60 @@ export async function sendArkivTransaction(
       expiresIn: item.expiresIn,
     })),
   ])
+  const payloadReceiptByKey = new Map(
+    payloadReceipts.map((submission) => [
+      payloadReceiptKey(submission.operation, submission.entityKey),
+      submission,
+    ]),
+  )
+
+  const payloadForOperation = (
+    operation: PayloadProviderOperation,
+    entityKey: Hex,
+    payload: Uint8Array,
+    contentType: string,
+  ): { payload: Hex; contentType: string } => {
+    if (payloadProviderConfig?.transactionPayload !== "reference") {
+      return { payload: toHex(payload), contentType }
+    }
+
+    const submission = payloadReceiptByKey.get(payloadReceiptKey(operation, entityKey))
+    if (!submission?.reference) {
+      throw new Error(`Missing payload provider reference for ${operation} ${entityKey}`)
+    }
+
+    return {
+      payload: referencePayloadHex(submission.reference),
+      contentType: PAYLOAD_REFERENCE_CONTENT_TYPE,
+    }
+  }
 
   const operations = [
-    ...(creates ?? []).map((item, i) => ({
-      operationType: EntityOperationType.Create,
-      entityKey: createdEntityKeys[i],
-      payload: toHex(item.payload),
-      contentType: encodeMime128(item.contentType),
-      attributes: item.attributes.map(encodeAttribute),
-      expiresAt: toBTL(item.expiresIn),
-      newOwner: ZERO_ADDRESS,
-    })),
-    ...(updates ?? []).map((item) => ({
-      operationType: EntityOperationType.Update,
-      entityKey: item.entityKey,
-      payload: toHex(item.payload),
-      contentType: encodeMime128(item.contentType),
-      attributes: item.attributes.map(encodeAttribute),
-      expiresAt: 0, // contract ignores expiresAt on UPDATE
-      newOwner: ZERO_ADDRESS,
-    })),
+    ...(creates ?? []).map((item, i) => {
+      const entityKey = createdEntityKeys[i]
+      const encoded = payloadForOperation("create", entityKey, item.payload, item.contentType)
+      return {
+        operationType: EntityOperationType.Create,
+        entityKey,
+        payload: encoded.payload,
+        contentType: encodeMime128(encoded.contentType),
+        attributes: item.attributes.map(encodeAttribute),
+        expiresAt: toBTL(item.expiresIn),
+        newOwner: ZERO_ADDRESS,
+      }
+    }),
+    ...(updates ?? []).map((item) => {
+      const encoded = payloadForOperation("update", item.entityKey, item.payload, item.contentType)
+      return {
+        operationType: EntityOperationType.Update,
+        entityKey: item.entityKey,
+        payload: encoded.payload,
+        contentType: encodeMime128(encoded.contentType),
+        attributes: item.attributes.map(encodeAttribute),
+        expiresAt: 0, // contract ignores expiresAt on UPDATE
+        newOwner: ZERO_ADDRESS,
+      }
+    }),
     ...(deletes ?? []).map((item) => ({
       operationType: EntityOperationType.Delete,
       entityKey: item.entityKey,
@@ -318,6 +413,8 @@ async function submitPayloadsToProviderIfConfigured(
 
   return Promise.all(
     jobs.map(async (job) => {
+      const nonce = randomPayloadReferenceNonce()
+      const payment = PAYLOAD_REFERENCE_PAYMENT
       const response = await provider.submitArkivPayload({
         namespace: config.namespace,
         payload: job.payload,
@@ -325,6 +422,8 @@ async function submitPayloadsToProviderIfConfigured(
         attributes: job.attributes,
         expiresIn: job.expiresIn,
         entityKey: job.entityKey,
+        nonce,
+        payment,
       })
 
       const metadataErrors = verifyPayloadMetadata(config.namespace, job.payload, response.payload)
@@ -333,7 +432,7 @@ async function submitPayloadsToProviderIfConfigured(
       }
 
       let verification: PayloadProviderSubmission["verification"]
-      if (config.verifyReceipt) {
+      if (config.verifyReceipt || config.transactionPayload === "reference") {
         if (!response.payload.signature) {
           throw new Error("Payload provider response did not include a receipt signature")
         }
@@ -341,6 +440,7 @@ async function submitPayloadsToProviderIfConfigured(
         verification = await verifyPayloadProviderSignature(
           response.payload,
           response.payload.signature,
+          { nonce, payment },
         )
         if (!verification.valid) {
           throw new Error(
@@ -356,6 +456,11 @@ async function submitPayloadsToProviderIfConfigured(
         created: response.created,
         arkiv: response.arkiv,
         payload: response.payload,
+        nonce,
+        payment,
+      }
+      if (config.transactionPayload === "reference") {
+        submission.reference = buildPayloadReference(submission)
       }
       if (verification) submission.verification = verification
 

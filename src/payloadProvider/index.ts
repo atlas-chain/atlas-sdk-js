@@ -20,7 +20,9 @@ export type {
   PayloadProviderReceipt,
   PayloadProviderSignature,
   PayloadProviderSubmission,
+  PayloadProviderVerificationContext,
   PayloadProviderVerificationResult,
+  PayloadReference,
   SubmitArkivPayloadInput,
   SubmitArkivPayloadResponse,
 } from "./types"

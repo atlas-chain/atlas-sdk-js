@@ -3,6 +3,7 @@ import type {
   PayloadProviderMetadata,
   PayloadProviderReceipt,
   PayloadProviderSignature,
+  PayloadProviderVerificationContext,
   PayloadProviderVerificationResult,
 } from "./types"
 
@@ -34,7 +35,7 @@ export function payloadProviderChecksum(payload: Uint8Array): string {
 }
 
 export function canonicalizePayloadReceipt(receipt: PayloadProviderReceipt): string {
-  return JSON.stringify({
+  const ordered: Record<string, unknown> = {
     service: receipt.service,
     action: receipt.action,
     payloadId: receipt.payloadId,
@@ -42,11 +43,17 @@ export function canonicalizePayloadReceipt(receipt: PayloadProviderReceipt): str
     checksum: receipt.checksum,
     sizeBytes: receipt.sizeBytes,
     submittedAt: receipt.submittedAt,
-  })
+  }
+  if (receipt.nonce !== undefined) ordered.nonce = receipt.nonce
+  if (receipt.payment !== undefined) ordered.payment = receipt.payment
+  return JSON.stringify(ordered)
 }
 
-export function receiptForPayloadMetadata(meta: PayloadProviderMetadata): PayloadProviderReceipt {
-  return {
+export function receiptForPayloadMetadata(
+  meta: PayloadProviderMetadata,
+  context: PayloadProviderVerificationContext = {},
+): PayloadProviderReceipt {
+  const receipt: PayloadProviderReceipt = {
     service: "atlas-payload-provider",
     action: "payloadReceived",
     payloadId: meta.id,
@@ -55,6 +62,9 @@ export function receiptForPayloadMetadata(meta: PayloadProviderMetadata): Payloa
     sizeBytes: meta.sizeBytes,
     submittedAt: meta.submittedAt,
   }
+  if (context.nonce !== undefined) receipt.nonce = context.nonce
+  if (context.payment !== undefined) receipt.payment = context.payment
+  return receipt
 }
 
 export function verifyPayloadMetadata(
@@ -89,6 +99,7 @@ export function verifyPayloadMetadata(
 export async function verifyPayloadProviderSignature(
   meta: PayloadProviderMetadata,
   signature: PayloadProviderSignature,
+  context?: PayloadProviderVerificationContext,
 ): Promise<PayloadProviderVerificationResult> {
   const errors: string[] = []
   let recoveredAddress: Hex | undefined
@@ -105,7 +116,8 @@ export async function verifyPayloadProviderSignature(
     errors.push("signature messageHash does not match the canonical receipt")
   }
 
-  const currentReceipt = receiptForPayloadMetadata(meta)
+  const expectedContext = context ?? receiptContextFromSignature(signature)
+  const currentReceipt = receiptForPayloadMetadata(meta, expectedContext)
   const legacyReceipt: PayloadProviderReceipt = { ...currentReceipt, action: "hostPayload" }
   const receiptMatches =
     canonicalizePayloadReceipt(signature.receipt) === canonicalizePayloadReceipt(currentReceipt) ||
@@ -152,4 +164,13 @@ export async function verifyPayloadProviderSignature(
     messageHash,
     errors,
   }
+}
+
+function receiptContextFromSignature(
+  signature: PayloadProviderSignature,
+): PayloadProviderVerificationContext {
+  const context: PayloadProviderVerificationContext = {}
+  if (signature.receipt.nonce !== undefined) context.nonce = signature.receipt.nonce
+  if (signature.receipt.payment !== undefined) context.payment = signature.receipt.payment
+  return context
 }

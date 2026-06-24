@@ -46,6 +46,8 @@ export class PayloadProviderClient {
       expiresIn: input.expiresIn,
       entityKey: input.entityKey,
     }
+    if (input.nonce) body.nonce = input.nonce
+    if (input.payment !== undefined) body.payment = input.payment
 
     const response = await this.fetchImpl(`${this.baseUrl}/arkiv/payloads`, {
       method: "POST",
