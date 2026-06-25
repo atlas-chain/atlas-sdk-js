@@ -1,6 +1,6 @@
 import type { Account, Chain, Client, Hex, PublicActions, Transport } from "viem"
 import { getBlockTiming } from "../../actions/public/getBlockTiming"
-import { getEntity, type GetEntityOptions } from "../../actions/public/getEntity"
+import { type GetEntityOptions, getEntity } from "../../actions/public/getEntity"
 import { getEntityCount } from "../../actions/public/getEntityCount"
 import { type QueryOptions, type QueryReturnType, query } from "../../actions/public/query"
 import { subscribeEntityEvents } from "../../actions/public/subscribeEntityEvents"
