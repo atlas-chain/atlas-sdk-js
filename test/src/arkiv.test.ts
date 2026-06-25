@@ -6,25 +6,39 @@ import {
   http,
   NoEntityFoundError,
   toBytes,
+  toHex,
   webSocket,
 } from "@atlas-chain/sdk"
 import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
 import { and, asc, desc, eq, gt, gte, lt, lte, or } from "@atlas-chain/sdk/query"
 import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils"
 import type { StartedTestContainer } from "testcontainers"
-import { execCommand, launchLocalArkivNode } from "./utils.js"
+import {
+  execCommand,
+  launchLocalArkivStack,
+  LOCAL_PAYLOAD_PROVIDER_INGRESS_BEARER_KEY,
+} from "./utils.js"
 
+const defaultDevPrivateKey =
+  "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80" as Hex
+const payloadReferenceContentType = "application/vnd.atlas.payload-reference+json"
+const transports = (process.env.ARKIV_SDK_TEST_INCLUDE_WS === "true"
+  ? ["http", "webSocket"]
+  : ["http"]) as ("http" | "webSocket")[]
 
 const basicCRUDTestTimeout: number = parseInt(process.env.ARKIV_SDK_TEST_CRUD_TIMEOUT || "30000")
 
 describe("Arkiv Integration Tests for public client", () => {
   let arkivNode: StartedTestContainer | undefined
+  let payloadProvider: StartedTestContainer | undefined
+  let payloadProviderUrl: string | undefined
   let publicClient: PublicArkivClient
   let publicClientWS: PublicArkivClient
   let walletClient: WalletArkivClient
   let walletClientWS: WalletArkivClient
+  let payloadProviderWalletClient: WalletArkivClient | undefined
   let chainId: number
-  const privateKey = process.env.PRIVATE_KEY as Hex
+  const privateKey = (process.env.PRIVATE_KEY ?? defaultDevPrivateKey) as Hex
 
   beforeAll(async () => {
     let rpcName: string
@@ -37,11 +51,13 @@ describe("Arkiv Integration Tests for public client", () => {
       rpcName = "External Arkiv Node"
       chainId = parseInt(process.env.ARKIV_SDK_TEST_CHAIN_ID || "1337")
     } else {
-      const { container, httpPort, wsPort } = await launchLocalArkivNode(privateKeyToAccount(privateKey).address)
+      const stack = await launchLocalArkivStack(privateKeyToAccount(privateKey).address)
       rpcName = "Containerized Arkiv Node"
-      arkivNode = container
-      httpUrls = [`http://127.0.0.1:${httpPort}`]
-      wsUrls = [`ws://127.0.0.1:${wsPort}`]
+      arkivNode = stack.container
+      payloadProvider = stack.payloadProvider
+      payloadProviderUrl = stack.payloadProviderUrl
+      httpUrls = [`http://127.0.0.1:${stack.httpPort}`]
+      wsUrls = [`ws://127.0.0.1:${stack.wsPort}`]
       chainId = 1337
     }
 
@@ -80,7 +96,22 @@ describe("Arkiv Integration Tests for public client", () => {
       chain: localTestNetwork,
       account: privateKeyToAccount(privateKey),
     })
-  }, 60000)
+
+    if (payloadProviderUrl) {
+      payloadProviderWalletClient = createWalletClient({
+        transport: http(),
+        chain: localTestNetwork,
+        account: privateKeyToAccount(privateKey),
+        payloadProvider: {
+          url: payloadProviderUrl,
+          bearerKey: LOCAL_PAYLOAD_PROVIDER_INGRESS_BEARER_KEY,
+          namespace: "arkiv.entities",
+          transactionPayload: "reference",
+          verifyReceipt: true,
+        },
+      })
+    }
+  }, parseInt(process.env.ARKIV_SDK_TEST_SETUP_TIMEOUT || "600000"))
 
   async function createEntityForTest(
     transport: "http" | "webSocket",
@@ -89,7 +120,16 @@ describe("Arkiv Integration Tests for public client", () => {
     const payload = options.payload ?? "Hello world"
 
     if (arkivNode) {
-      const command = ["arkiv-cli", "--private-key", privateKey, "create", "--payload", payload, "--btl", 1000]
+      const command = [
+        "arkiv-cli",
+        "--private-key",
+        privateKey,
+        "create",
+        "--payload",
+        payload,
+        "--btl",
+        "1000",
+      ]
 
       if (options.attribute) {
         command.push("--attributes", `${options.attribute.key}:string=${options.attribute.value}`)
@@ -120,16 +160,19 @@ describe("Arkiv Integration Tests for public client", () => {
     if (arkivNode) {
       await arkivNode.stop()
     }
+    if (payloadProvider) {
+      await payloadProvider.stop()
+    }
   })
 
-  test.each(["http", "webSocket"] as const)("should get chain ID using %s", async (transport) => {
+  test.each(transports)("should get chain ID using %s", async (transport) => {
     const client = transport === "http" ? publicClient : publicClientWS
     const cId = await client.getChainId()
     expect(cId).toBeDefined()
     expect(cId).toBe(chainId)
   })
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should get block number using %s",
     async (transport) => {
       const client = transport === "http" ? publicClient : publicClientWS
@@ -140,7 +183,7 @@ describe("Arkiv Integration Tests for public client", () => {
     },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should get entity count using %s",
     async (transport) => {
       const client = transport === "http" ? publicClient : publicClientWS
@@ -151,7 +194,58 @@ describe("Arkiv Integration Tests for public client", () => {
     },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test(
+    "should create an entity through the local payload provider using a signed reference",
+    async () => {
+      if (!payloadProviderWalletClient || !payloadProviderUrl) {
+        throw new Error("local payload provider is required for this test")
+      }
+
+      const marker = `local-payload-reference-${crypto.randomUUID()}`
+      const payload = jsonToPayload({
+        entity: {
+          entityType: "payload-reference-test",
+          entityId: marker,
+        },
+        marker,
+      })
+
+      const { entityKey, txHash, payloadReceipt } = await payloadProviderWalletClient.createEntity({
+        payload,
+        contentType: "application/json",
+        attributes: [{ key: "payloadref", value: marker }],
+        expiresIn: ExpirationTime.fromBlocks(1000),
+      })
+
+      expect(payloadReceipt).toBeDefined()
+      expect(payloadReceipt?.reference).toBeDefined()
+      expect(payloadReceipt?.verification?.valid).toBe(true)
+
+      const entity = await publicClient.getEntity(entityKey)
+      expect(entity.contentType as string).toBe(payloadReferenceContentType)
+
+      const reference = JSON.parse(new TextDecoder().decode(entity.payload))
+      expect(reference.kind).toBe("atlas.payloadReference")
+      expect(reference.provider).toBe("atlas-payload-provider")
+      expect(reference.id).toBe(payloadReceipt?.payload.id)
+      expect(reference.signature.signer.toLowerCase()).toBe(
+        "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+      )
+
+      const rawPayloadResponse = await fetch(`${payloadProviderUrl}/payloads/${reference.id}/raw`)
+      expect(rawPayloadResponse.ok).toBe(true)
+      expect(Array.from(new Uint8Array(await rawPayloadResponse.arrayBuffer()))).toEqual(
+        Array.from(payload),
+      )
+
+      const tx = await publicClient.getTransaction({ hash: txHash })
+      expect(tx.input).toContain(toHex(new TextEncoder().encode(reference.id)).slice(2))
+      expect(tx.input).not.toContain(toHex(payload).slice(2))
+    },
+    { timeout: 120000 },
+  )
+
+  test.each(transports)(
     "should get block timing using %s",
     async (transport) => {
       const client = transport === "http" ? publicClient : publicClientWS
@@ -167,7 +261,7 @@ describe("Arkiv Integration Tests for public client", () => {
     },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should call getEntity with existing key using %s",
     async (transport) => {
       const client = transport === "http" ? publicClient : publicClientWS
@@ -194,7 +288,7 @@ describe("Arkiv Integration Tests for public client", () => {
     },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle getEntity with non-existent key using %s",
     async (transport) => {
       const client = transport === "http" ? publicClient : publicClientWS
@@ -211,7 +305,7 @@ describe("Arkiv Integration Tests for public client", () => {
     },
   )
 
-  test.each(["http", "webSocket"] as const)("should handle query using %s", async (transport) => {
+  test.each(transports)("should handle query using %s", async (transport) => {
     const client = transport === "http" ? publicClient : publicClientWS
     const testKey = await createEntityForTest(transport, {
       attribute: { key: "key", value: "value" },
@@ -276,7 +370,7 @@ describe("Arkiv Integration Tests for public client", () => {
     expect(rawQueryAtBlock.blockNumber).toEqual(1n) // TODO: bring back to 1n once this feature is backed by the DBChain, otherwise if we resign from bi-temporal support we should remove this part of test
   })
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle query with createdBy filter using %s",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
@@ -321,7 +415,7 @@ describe("Arkiv Integration Tests for public client", () => {
     { timeout: 20000 },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle query using %s fetching only requested data",
     async (transport) => {
       const client = transport === "http" ? publicClient : publicClientWS
@@ -374,7 +468,7 @@ describe("Arkiv Integration Tests for public client", () => {
     },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle basic CRUD operations using %s",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
@@ -470,7 +564,7 @@ describe("Arkiv Integration Tests for public client", () => {
     { timeout: basicCRUDTestTimeout },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle mutateEntities using %s",
     async (transport) => {
       const newOwner = "0x6186b0dba9652262942d5a465d49686eb560834c" as Hex
@@ -580,7 +674,7 @@ describe("Arkiv Integration Tests for public client", () => {
     { timeout: 60000 },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle query with pagination using",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
@@ -636,7 +730,7 @@ describe("Arkiv Integration Tests for public client", () => {
     },
     { timeout: 60000 },
   )
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "Query with various projections using withAttributes, withMetadata, withPayload",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
@@ -719,7 +813,7 @@ describe("Arkiv Integration Tests for public client", () => {
     { timeout: 20000 },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle ownershipChange using %s",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
@@ -754,7 +848,7 @@ describe("Arkiv Integration Tests for public client", () => {
     { timeout: 20000 },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should properly handle numeric values in attributes and metadata",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
@@ -874,7 +968,7 @@ describe("Arkiv Integration Tests for public client", () => {
     expect(writeClient.createEntity(entity)).rejects.toThrowError(/^Transaction failed:.*Ident32InvalidByte.*$/s)
   })
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle range queries on numeric attributes using %s",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
@@ -914,7 +1008,7 @@ describe("Arkiv Integration Tests for public client", () => {
     { timeout: 60000 },
   )
 
-  test.each(["http", "webSocket"] as const)(
+  test.each(transports)(
     "should handle range queries on string attributes using %s",
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
