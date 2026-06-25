@@ -19,7 +19,7 @@ describe("Entity.toText()", () => {
       [],
     )
     expect(() => entity.toText()).toThrow(
-      "Entity has no payload – it was probably queried without withPayload(true) via QueryBuilder",
+      "Entity has no payload. Query with hydratePayloads: true or fetch the payload from the payload provider.",
     )
   })
 
@@ -75,7 +75,7 @@ describe("Entity.toJson()", () => {
       [],
     )
     expect(() => entity.toJson()).toThrow(
-      "Entity has no payload – it was probably queried without withPayload(true) via QueryBuilder",
+      "Entity has no payload. Query with hydratePayloads: true or fetch the payload from the payload provider.",
     )
   })
 

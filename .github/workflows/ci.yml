@@ -114,8 +114,10 @@ jobs:
       - name: Install test dependencies
         run: cd test && bun install --frozen-lockfile --no-verify
 
-      - name: Pull Arkiv Docker image
-        run: docker pull golemnetwork/arkiv-op-geth:latest
+      - name: Pull local test Docker images
+        run: |
+          docker pull ghcr.io/atlas-chain/arkiv-node-dev-int:0.1.7
+          docker pull ghcr.io/atlas-chain/atlas-payload-provider:v0.1.2
 
       # Using a test private key (randomly generated for testing purposes only)
       - name: Run component tests

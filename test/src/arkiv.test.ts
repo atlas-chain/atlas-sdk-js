@@ -1,5 +1,10 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test"
-import type { Hex, PublicArkivClient, WalletArkivClient } from "@atlas-chain/sdk"
+import type {
+  Hex,
+  PayloadProviderConfig,
+  PublicArkivClient,
+  WalletArkivClient,
+} from "@atlas-chain/sdk"
 import {
   createPublicClient,
   createWalletClient,
@@ -12,13 +17,15 @@ import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
 import { and, asc, desc, eq, gt, gte, lt, lte, or } from "@atlas-chain/sdk/query"
 import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils"
 import type { StartedTestContainer } from "testcontainers"
-import { execCommand, launchLocalArkivNode } from "./utils.js"
+import { launchLocalArkivNode, launchLocalPayloadProvider } from "./utils.js"
 
 
 const basicCRUDTestTimeout: number = parseInt(process.env.ARKIV_SDK_TEST_CRUD_TIMEOUT || "30000")
 
 describe("Arkiv Integration Tests for public client", () => {
   let arkivNode: StartedTestContainer | undefined
+  let payloadProvider: StartedTestContainer | undefined
+  let payloadProviderConfig: PayloadProviderConfig | undefined
   let publicClient: PublicArkivClient
   let publicClientWS: PublicArkivClient
   let walletClient: WalletArkivClient
@@ -36,7 +43,17 @@ describe("Arkiv Integration Tests for public client", () => {
       wsUrls = [process.env.ARKIV_SDK_TEST_WS_URL || "undefined"]
       rpcName = "External Arkiv Node"
       chainId = parseInt(process.env.ARKIV_SDK_TEST_CHAIN_ID || "1337")
+      if (process.env.ARKIV_SDK_TEST_PAYLOAD_PROVIDER_URL) {
+        payloadProviderConfig = {
+          url: process.env.ARKIV_SDK_TEST_PAYLOAD_PROVIDER_URL,
+          bearerKey: process.env.ARKIV_SDK_TEST_PAYLOAD_PROVIDER_BEARER_KEY,
+        }
+      }
     } else {
+      const localPayloadProvider = await launchLocalPayloadProvider()
+      payloadProvider = localPayloadProvider.container
+      payloadProviderConfig = localPayloadProvider.config
+
       const { container, httpPort, wsPort } = await launchLocalArkivNode(privateKeyToAccount(privateKey).address)
       rpcName = "Containerized Arkiv Node"
       arkivNode = container
@@ -65,20 +82,24 @@ describe("Arkiv Integration Tests for public client", () => {
     publicClient = createPublicClient({
       transport: http(),
       chain: localTestNetwork,
+      payloadProvider: payloadProviderConfig,
     })
     publicClientWS = createPublicClient({
       transport: webSocket(),
       chain: localTestNetwork,
+      payloadProvider: payloadProviderConfig,
     })
     walletClient = createWalletClient({
       transport: http(),
       chain: localTestNetwork,
       account: privateKeyToAccount(privateKey),
+      payloadProvider: payloadProviderConfig,
     })
     walletClientWS = createWalletClient({
       transport: webSocket(),
       chain: localTestNetwork,
       account: privateKeyToAccount(privateKey),
+      payloadProvider: payloadProviderConfig,
     })
   }, 60000)
 
@@ -87,24 +108,6 @@ describe("Arkiv Integration Tests for public client", () => {
     options: { payload?: string; attribute?: { key: string; value: string } } = {},
   ) {
     const payload = options.payload ?? "Hello world"
-
-    if (arkivNode) {
-      const command = ["arkiv-cli", "--private-key", privateKey, "create", "--payload", payload, "--btl", 1000]
-
-      if (options.attribute) {
-        command.push("--attributes", `${options.attribute.key}:string=${options.attribute.value}`)
-      }
-
-      const result = await execCommand(arkivNode, command)
-      const match = result.match(/entity_key:(.*)/)
-      if (!match || !match[1]) {
-        throw new Error(
-          `Failed to parse entity key from CLI output. Expected format "entity_key: <hex>". Actual output:\n${result}`,
-        )
-      }
-      return match[1].trim() as Hex
-    }
-
     const client = transport === "http" ? walletClient : walletClientWS
     const { entityKey } = await client.createEntity({
       payload: toBytes(payload),
@@ -119,6 +122,9 @@ describe("Arkiv Integration Tests for public client", () => {
   afterAll(async () => {
     if (arkivNode) {
       await arkivNode.stop()
+    }
+    if (payloadProvider) {
+      await payloadProvider.stop()
     }
   })
 

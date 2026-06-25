@@ -1,8 +1,21 @@
-import type { Hex } from "@atlas-chain/sdk"
+import type { Hex, PayloadProviderConfig } from "@atlas-chain/sdk"
 import { GenericContainer, type StartedTestContainer, Wait } from "testcontainers"
 
+const ARKIV_NODE_IMAGE =
+  process.env.ARKIV_SDK_TEST_ARKIV_NODE_IMAGE ??
+  "ghcr.io/atlas-chain/arkiv-node-dev-int:0.1.7"
+const PAYLOAD_PROVIDER_IMAGE =
+  process.env.ARKIV_SDK_TEST_PAYLOAD_PROVIDER_IMAGE ??
+  "ghcr.io/atlas-chain/atlas-payload-provider:v0.1.2"
+const PAYLOAD_PROVIDER_BEARER_KEY =
+  process.env.ARKIV_SDK_TEST_PAYLOAD_PROVIDER_BEARER_KEY ??
+  "sdk-local-payload-provider"
+const PAYLOAD_PROVIDER_SIGNER_PRIVATE_KEY =
+  process.env.ARKIV_SDK_TEST_PAYLOAD_PROVIDER_SIGNER_PRIVATE_KEY ??
+  "0x0000000000000000000000000000000000000000000000000000000000000001"
+
 export async function launchLocalArkivNode(withFundingAddress: Hex | undefined = undefined) {
-  const container = await new GenericContainer("ghcr.io/arkiv-network/arkiv-node-dev:293adadf10ce3b54711649390a6a0d8f7b29f7a8")
+  const container = await new GenericContainer(ARKIV_NODE_IMAGE)
     .withExposedPorts(8545)
     .withExposedPorts(8546)
     .withWaitStrategy(Wait.forLogMessage("Block added to canonical chain", 1))
@@ -23,6 +36,26 @@ export async function launchLocalArkivNode(withFundingAddress: Hex | undefined =
   }
 
   return { container, httpPort, wsPort }
+}
+
+export async function launchLocalPayloadProvider() {
+  const container = await new GenericContainer(PAYLOAD_PROVIDER_IMAGE)
+    .withExposedPorts(28883)
+    .withEnvironment({
+      INGRESS_BEARER_KEY: PAYLOAD_PROVIDER_BEARER_KEY,
+      SIGNER_PRIVATE_KEY: PAYLOAD_PROVIDER_SIGNER_PRIVATE_KEY,
+    })
+    .withWaitStrategy(Wait.forLogMessage("atlas payload provider listening", 1))
+    .withStartupTimeout(30000)
+    .start()
+
+  const port = container.getMappedPort(28883)
+  const config: PayloadProviderConfig = {
+    url: `http://127.0.0.1:${port}`,
+    bearerKey: PAYLOAD_PROVIDER_BEARER_KEY,
+  }
+
+  return { container, port, config }
 }
 
 export async function execCommand(container: StartedTestContainer, command: string[]) {
