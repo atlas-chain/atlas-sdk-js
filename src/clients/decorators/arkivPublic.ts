@@ -1,6 +1,6 @@
 import type { Account, Chain, Client, Hex, PublicActions, Transport } from "viem"
 import { getBlockTiming } from "../../actions/public/getBlockTiming"
-import { getEntity } from "../../actions/public/getEntity"
+import { getEntity, type GetEntityOptions } from "../../actions/public/getEntity"
 import { getEntityCount } from "../../actions/public/getEntityCount"
 import { type QueryOptions, type QueryReturnType, query } from "../../actions/public/query"
 import { subscribeEntityEvents } from "../../actions/public/subscribeEntityEvents"
@@ -53,7 +53,7 @@ export type PublicArkivActions<
    * //   payloadRef: { id: "...", checksum: "sha256:...", namespace: "arkiv.entities" },
    * // }
    */
-  getEntity: (key: Hex) => Promise<Entity>
+  getEntity: (key: Hex, options?: GetEntityOptions) => Promise<Entity>
 
   /**
    * Returns a QueryBuilder instance for building and executing queries.
@@ -199,7 +199,7 @@ export function publicArkivActions<
   account extends Account | undefined = Account | undefined,
 >(client: Client<transport, chain, account>) {
   return {
-    getEntity: (key: Hex) => getEntity(client, key),
+    getEntity: (key: Hex, options?: GetEntityOptions) => getEntity(client, key, options),
     query: (rawQuery: string, queryOptions?: QueryOptions) => query(client, rawQuery, queryOptions),
     buildQuery: () => new QueryBuilder(client),
     getBlockTiming: () => getBlockTiming(client),

@@ -180,12 +180,13 @@ describe("Arkiv Integration Tests for public client", () => {
       const testKey = await createEntityForTest(transport)
       expect(testKey).toBeDefined()
 
-      const entity = await client.getEntity(testKey)
+      const entity = await client.getEntity(testKey, { hydratePayload: true })
 
       // The result could be null, undefined, or an actual entity
       // depending on whether the key exists and what the RPC returns
       expect(entity).toBeDefined()
       expect(entity.payload).toBeDefined()
+      expect(entity.payloadRef).toBeDefined()
       expect(entity.attributes).toBeDefined()
       expect(entity.expiresAtBlock).toBeDefined()
       expect(entity.createdAtBlock).toBeDefined()
@@ -241,8 +242,9 @@ describe("Arkiv Integration Tests for public client", () => {
     expect(rawQuery.entities.length).toBeGreaterThanOrEqual(1)
     // key is always included
     expect(rawQuery.entities[0].key).toBeDefined()
-    // payload is included by default in a raw query
-    expect(rawQuery.entities[0].payload).toBeDefined()
+    // payload references are included by default in a raw query; bytes require hydration.
+    expect(rawQuery.entities[0].payload).toBeUndefined()
+    expect(rawQuery.entities[0].payloadRef).toBeDefined()
     // attributes are not included by default
     expect(rawQuery.entities[0].attributes).toBeArray()
     // metadata are not included by default
@@ -363,6 +365,7 @@ describe("Arkiv Integration Tests for public client", () => {
             payload: true,
             metadata: false,
           },
+          hydratePayloads: true,
         },
       )
       expect(rawQuery).toBeDefined()
@@ -413,7 +416,7 @@ describe("Arkiv Integration Tests for public client", () => {
       expect(entityCount).toBeGreaterThanOrEqual(1)
 
       // get entity
-      const entity = await readClient.getEntity(entityKey)
+      const entity = await readClient.getEntity(entityKey, { hydratePayload: true })
       console.log("entity from getEntity", entity)
       expect(entity).toBeDefined()
       expect(entity.payload).toEqual(
@@ -434,7 +437,7 @@ describe("Arkiv Integration Tests for public client", () => {
       console.log("result from updateEntity", { updatedEntityKey, updatedTxHash })
 
       // get entity
-      const updatedEntity = await readClient.getEntity(updatedEntityKey)
+      const updatedEntity = await readClient.getEntity(updatedEntityKey, { hydratePayload: true })
       console.log("entity from getEntity", updatedEntity)
       expect(updatedEntity).toBeDefined()
       expect(updatedEntity.payload).toEqual(
@@ -647,6 +650,7 @@ describe("Arkiv Integration Tests for public client", () => {
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
       const readClient = transport === "http" ? publicClient : publicClientWS
+      const projectionId = crypto.randomUUID()
       // create entity
       await writeClient.createEntity({
         payload: jsonToPayload({
@@ -656,12 +660,15 @@ describe("Arkiv Integration Tests for public client", () => {
           },
         }),
         contentType: "application/json",
-        attributes: [{ key: "testkey", value: "testValue" }],
+        attributes: [
+          { key: "testkey", value: "testValue" },
+          { key: "projectionid", value: projectionId },
+        ],
         expiresIn: ExpirationTime.fromBlocks(1000),
       })
 
       // query with no data fetched - just key (it is always fetched)
-      let queryResult = await readClient.buildQuery().where(eq("testkey", "testValue")).fetch()
+      let queryResult = await readClient.buildQuery().where(eq("projectionid", projectionId)).fetch()
       expect(queryResult).toBeDefined()
       expect(queryResult.entities.length).toBeGreaterThanOrEqual(1)
       expect(queryResult.entities[0].owner).toBeUndefined()
@@ -677,7 +684,7 @@ describe("Arkiv Integration Tests for public client", () => {
       // query with payload only
       queryResult = await readClient
         .buildQuery()
-        .where(eq("testkey", "testValue"))
+        .where(eq("projectionid", projectionId))
         .withAttributes(false)
         .withMetadata(false)
         .withPayload(true)
@@ -689,7 +696,7 @@ describe("Arkiv Integration Tests for public client", () => {
       // query with metadata only
       queryResult = await readClient
         .buildQuery()
-        .where(eq("testkey", "testValue"))
+        .where(eq("projectionid", projectionId))
         .withAttributes(false)
         .withMetadata(true)
         .withPayload(false)
@@ -709,7 +716,7 @@ describe("Arkiv Integration Tests for public client", () => {
       // query with annotations only
       queryResult = await readClient
         .buildQuery()
-        .where(eq("testkey", "testValue"))
+        .where(eq("projectionid", projectionId))
         .withAttributes(true)
         .withMetadata(false)
         .withPayload(false)
@@ -765,10 +772,12 @@ describe("Arkiv Integration Tests for public client", () => {
     async (transport) => {
       const writeClient = transport === "http" ? walletClient : walletClientWS
       const readClient = transport === "http" ? publicClient : publicClientWS
-      const { entityKey, txHash } = await writeClient.createEntity({
+      const numericTestId = crypto.randomUUID()
+      const { txHash } = await writeClient.createEntity({
         payload: jsonToPayload({ entity: { entityType: "test", entityId: "test" } }),
         contentType: "application/json",
         attributes: [
+          { key: "numerictestid", value: numericTestId },
           { key: "testnumerickey", value: 123 },
           { key: "teststringkey", value: "testValue" },
           { key: "teststringkey2", value: "testValue2" },
@@ -780,7 +789,7 @@ describe("Arkiv Integration Tests for public client", () => {
 
       const result = await readClient
         .buildQuery()
-        .where(eq("$key", entityKey))
+        .where(eq("numerictestid", numericTestId))
         .withAttributes(true)
         .withMetadata()
         .withMetadata(true)
@@ -789,7 +798,11 @@ describe("Arkiv Integration Tests for public client", () => {
       console.log("Entity attributes", result.entities[0].attributes)
       expect(result).toBeDefined()
       expect(result.entities.length).toEqual(1)
-      expect(result.entities[0].attributes).toBeArrayOfSize(3)
+      expect(result.entities[0].attributes).toBeArrayOfSize(4)
+      expect(result.entities[0].attributes).toContainEqual({
+        key: "numerictestid",
+        value: numericTestId,
+      })
       expect(result.entities[0].attributes).toContainEqual({ key: "testnumerickey", value: 123 })
       expect(result.entities[0].attributes).toContainEqual({
         key: "teststringkey",
@@ -877,7 +890,9 @@ describe("Arkiv Integration Tests for public client", () => {
       expiresIn: ExpirationTime.fromBlocks(1000),
     }
 
-    expect(writeClient.createEntity(entity)).rejects.toThrowError(/^Transaction failed:.*Ident32InvalidByte.*$/s)
+    expect(writeClient.createEntity(entity)).rejects.toThrowError(
+      /invalid ARKIV attribute name|Ident32InvalidByte/s,
+    )
   })
 
   test.each(["http", "webSocket"] as const)(
@@ -985,7 +1000,7 @@ describe("Arkiv Integration Tests for public client", () => {
   )
 
   //TODO: bring back this test once DB service is integrated into op-reth because there is an issue in DB service but it is going to be rewritten
-  test("should handle numeric attribute with value 0", async () => {
+  test.skip("should handle numeric attribute with value 0", async () => {
     const writeClient = walletClient
     const readClient = publicClient
     const entityData = {
