@@ -101,7 +101,7 @@ export async function processQuery(
     includeData: {
       key: true,
       attributes: withAttributes ?? false,
-      payload: withPayload ?? false,
+      payloadReference: withPayload ?? false,
       contentType: withMetadata ?? false,
       expiration: withMetadata ?? false,
       owner: withMetadata ?? false,

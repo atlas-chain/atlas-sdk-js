@@ -61,6 +61,18 @@ export class PayloadProviderClient {
     return (await this.parse(response)) as SubmitArkivPayloadResponse
   }
 
+  async getRawPayload(id: string): Promise<Uint8Array> {
+    const response = await this.fetchImpl(`${this.baseUrl}/payloads/${id}/raw`, {
+      method: "GET",
+      headers: this.authHeaders(),
+    })
+    if (!response.ok) {
+      const text = await response.text()
+      throw new Error(`${response.status} ${response.statusText}: ${text}`)
+    }
+    return new Uint8Array(await response.arrayBuffer())
+  }
+
   private authHeaders(): Record<string, string> {
     return this.bearerKey ? { Authorization: `Bearer ${this.bearerKey}` } : {}
   }

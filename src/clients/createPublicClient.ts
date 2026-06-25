@@ -10,6 +10,8 @@ import type {
   Transport,
 } from "viem"
 import { createClient, publicActions } from "viem"
+import { setPayloadProviderConfig } from "../payloadProvider/config"
+import type { PayloadProviderConfig } from "../payloadProvider/types"
 import type { ArkivRpcSchema } from "../types/rpcSchema"
 import { type PublicArkivActions, publicArkivActions } from "./decorators/arkivPublic"
 
@@ -21,6 +23,15 @@ export type PublicArkivClient<
 > = Prettify<
   Client<transport, chain, accountOrAddress, rpcSchema, PublicArkivActions<transport, chain>>
 >
+
+export type PublicArkivClientConfig<
+  transport extends Transport,
+  chain extends Chain | undefined = undefined,
+  accountOrAddress extends Account | Address | undefined = undefined,
+  rpcSchema extends RpcSchema | undefined = ArkivRpcSchema,
+> = PublicClientConfig<transport, chain, accountOrAddress, rpcSchema> & {
+  payloadProvider?: PayloadProviderConfig | false
+}
 
 /**
  * Creates a Public Client with a given [Transport](https://viem.sh/docs/clients/intro) configured for a [Chain](https://viem.sh/docs/clients/chains).
@@ -47,19 +58,31 @@ export function createPublicClient<
   accountOrAddress extends Account | Address | undefined = undefined,
   rpcSchema extends RpcSchema | undefined = ArkivRpcSchema,
 >(
-  parameters: PublicClientConfig<transport, chain, accountOrAddress, rpcSchema>,
+  parameters: PublicArkivClientConfig<transport, chain, accountOrAddress, rpcSchema>,
 ): PublicArkivClient<transport, chain, ParseAccount<accountOrAddress>, rpcSchema> {
-  const { key = "public", name = "Public Client" } = parameters
+  const {
+    key = "public",
+    name = "Public Client",
+    payloadProvider,
+    ...clientParameters
+  } = parameters
   const client = createClient({
-    ...parameters,
+    ...clientParameters,
     key,
     name,
   })
+  setPayloadProviderConfig(client, payloadProvider)
 
-  return client.extend(publicActions).extend(publicArkivActions) as unknown as PublicArkivClient<
+  const publicClient = client.extend(publicActions)
+  setPayloadProviderConfig(publicClient, payloadProvider)
+
+  const arkivClient = publicClient.extend(publicArkivActions) as unknown as PublicArkivClient<
     transport,
     chain,
     ParseAccount<accountOrAddress>,
     rpcSchema
   >
+  setPayloadProviderConfig(arkivClient, payloadProvider)
+
+  return arkivClient
 }

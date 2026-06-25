@@ -8,7 +8,6 @@ export type PayloadProviderConfig = {
   namespace?: string
   verifyReceipt?: boolean
   fetch?: typeof fetch
-  transactionPayload?: "inline" | "reference"
 }
 
 export type PayloadProviderReceipt = {
@@ -99,6 +98,16 @@ export type PayloadReference = {
   nonce: Hex
   payment: number
   signature: PayloadProviderSignature
+}
+
+export type PayloadReferenceSummary = {
+  provider: "atlas-payload-provider" | string
+  id: string
+  namespace: string
+  contentType?: MimeType | string
+  checksum: string
+  sizeBytes: number
+  submittedAt?: string
 }
 
 export type PayloadProviderOperation = "create" | "update"

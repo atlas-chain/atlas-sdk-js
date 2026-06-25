@@ -9,6 +9,7 @@ export enum EntityOperationType {
   Expire = 6,
 }
 
+import type { PayloadReferenceSummary } from "../payloadProvider"
 import type { MimeType } from "../types"
 import type { Attribute } from "./attributes"
 
@@ -22,6 +23,7 @@ export class Entity {
   lastModifiedAtBlock: bigint | undefined
   transactionIndexInBlock: bigint | undefined
   operationIndexInTransaction: bigint | undefined
+  payloadRef: PayloadReferenceSummary | undefined
   payload: Uint8Array | undefined
   attributes: Attribute[]
 
@@ -37,6 +39,7 @@ export class Entity {
     operationIndexInTransaction: bigint | undefined = undefined,
     payload: Uint8Array | undefined = undefined,
     attributes: Attribute[],
+    payloadRef: PayloadReferenceSummary | undefined = undefined,
   ) {
     this.key = key
     this.owner = owner
@@ -49,6 +52,7 @@ export class Entity {
     this.payload = payload
     this.attributes = attributes
     this.contentType = contentType
+    this.payloadRef = payloadRef
   }
 
   /**
@@ -60,7 +64,7 @@ export class Entity {
   toText(): string {
     if (this.payload === undefined) {
       throw new Error(
-        "Entity has no payload – it was probably queried without withPayload(true) via QueryBuilder",
+        "Entity has no payload. Query with hydratePayloads: true or fetch the payload from the payload provider.",
       )
     }
     try {
@@ -79,7 +83,7 @@ export class Entity {
    * Throws an error if the payload is empty or cannot be parsed as JSON.
    * @returns The parsed JSON object from the entity payload.
    */
-  toJson(): any {
+  toJson(): unknown {
     const text = this.toText()
     if (!text) {
       throw new Error("Entity has empty payload, cannot parse as JSON")

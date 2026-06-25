@@ -1,17 +1,16 @@
 # Payload Provider Transaction Flow
 
-This document describes the first SDK integration with the Atlas Payload Provider.
-The current ARKIV contract remains unchanged in this version.
+This document describes the SDK integration with the Atlas Payload Provider.
 
 ## Goal
 
-Before the SDK sends a create or update transaction to the ARKIV RPC, it can submit
+Before the SDK sends a create or update transaction to the ARKIV RPC, it submits
 the entity payload bytes to a payload-provider service. The provider stores the
-payload, returns metadata, and optionally returns an EIP-191 signature proving that
-it received the exact payload.
+payload, returns metadata, and returns an EIP-191 signature proving that it
+received the exact payload.
 
-The transaction still sends the original payload bytes inline to the current
-contract. Provider data is additive and is returned to the caller.
+The transaction sends a signed payload reference to the Arkiv precompile. Inline
+create/update payloads are no longer supported.
 
 ## First Version Flow
 
@@ -21,7 +20,7 @@ sequenceDiagram
   participant SDK
   participant Provider as Payload Provider
   participant RPC as ARKIV RPC
-  participant Contract as Current Contract
+  participant Contract as Arkiv Precompile
 
   App->>SDK: createEntity/updateEntity/mutateEntities(payload, attrs, contentType, expiresIn)
 
@@ -30,7 +29,7 @@ sequenceDiagram
   SDK->>SDK: Base64 encode original payload bytes
 
   SDK->>Provider: POST /arkiv/payloads
-  Note over SDK,Provider: payloadBase64 + contentType + attributes + expiresIn + entityKey
+  Note over SDK,Provider: payloadBase64 + contentType + attributes + expiresIn + entityKey + nonce + payment
 
   Provider->>Provider: Validate payload, attrs, namespace
   Provider->>Provider: Compute payload id and checksum
@@ -40,13 +39,13 @@ sequenceDiagram
   Provider-->>SDK: Payload metadata + full signature receipt
 
   SDK->>SDK: Verify provider receipt/signature
-  SDK->>SDK: Keep receipt for return value
+  SDK->>SDK: Build payload reference JSON
 
   SDK->>RPC: writeContract execute(ops)
-  Note over SDK,RPC: Current version still sends original payload bytes in tx calldata
+  Note over SDK,RPC: tx calldata contains signed payload reference, not raw bytes
 
   RPC->>Contract: execute(ops)
-  Contract->>Contract: Store entity payload + metadata on chain
+  Contract->>Contract: Verify reference and store reference bytes + metadata
   Contract-->>RPC: Transaction result
 
   RPC-->>SDK: Transaction hash
@@ -58,18 +57,18 @@ sequenceDiagram
 
 ## Data Movement
 
-Conceptually, the same original payload bytes take two paths:
+Conceptually, the original payload bytes leave Arkiv RPC traffic:
 
 ```text
 Original payload bytes
    |
    |--> Payload Provider: stored bytes + signed receipt
    |
-   |--> Current Contract: inline payload bytes, unchanged behavior
+   |--> Arkiv precompile: signed reference JSON only
 ```
 
-The provider path gives applications an external availability record immediately.
-The contract path keeps existing RPC, query, and read behavior intact.
+The provider path is the content delivery path. The Arkiv path stores and proves
+the reference.
 
 ## Provider Submission
 
@@ -96,12 +95,11 @@ The response includes:
 
 - normalized ARKIV context,
 - provider payload metadata,
-- and, when signing is enabled, the full EIP-191 receipt signature.
+- the full EIP-191 receipt signature.
 
 ## Return Values
 
-When payload-provider mode is enabled, wallet actions return their normal
-transaction data plus provider receipt data.
+Wallet actions return their normal transaction data plus provider receipt data.
 
 ```ts
 const result = await client.createEntity(...)
@@ -129,9 +127,7 @@ result.
 
 ## Reference Transaction Payload
 
-When `payloadProvider.transactionPayload` is `reference` (the default when a
-provider is configured), the lower branch changes from inline payload bytes to a
-provider reference:
+Create/update transactions always send a provider reference:
 
 ```text
 Original payload bytes
@@ -144,3 +140,16 @@ Original payload bytes
 The first reference format includes the full signature, signed nonce, and numeric
 payment. Later versions can optimize it into a smaller payload id, checksum,
 message hash, and compact signature format.
+
+## Reading Payloads
+
+`arkiv_query` returns metadata and a lightweight `payloadRef`, not raw payload
+bytes. Applications that need bytes call the payload provider directly:
+
+```http
+GET /payloads/{id}/raw
+```
+
+The SDK can do this automatically when asked with `hydratePayloads: true` or
+`QueryBuilder.withPayload()`. Hydration uses at most five concurrent downloads by
+default and verifies checksum/id before attaching bytes to `Entity.payload`.

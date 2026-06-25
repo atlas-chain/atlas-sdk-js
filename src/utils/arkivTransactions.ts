@@ -78,6 +78,7 @@ export const ENTITY_ERRORS_ABI = parseAbi([
   "error PayloadReferenceContentTypeInvalid(bytes contentType)",
   "error PayloadReferenceNonceUsed(bytes32 nonce)",
   "error PayloadReferencePaymentInvalid(uint256 payment)",
+  "error PayloadReferenceRequired(bytes contentType)",
 ])
 
 const EXECUTE_ABI = [...ENTITY_EXECUTE_ABI, ...ENTITY_ERRORS_ABI]
@@ -225,6 +226,10 @@ export async function sendArkivTransaction(
   const { creates, updates, deletes, extensions, ownershipChanges } = ops
   const owner = client.account.address as Address
   const payloadProviderConfig = getPayloadProviderConfig(client)
+  const needsPayloadProvider = (creates?.length ?? 0) + (updates?.length ?? 0) > 0
+  if (needsPayloadProvider && !payloadProviderConfig) {
+    throw new Error("Payload provider is required for create and update operations")
+  }
 
   const ownerNonce: bigint = creates?.length
     ? BigInt(
@@ -269,13 +274,7 @@ export async function sendArkivTransaction(
   const payloadForOperation = (
     operation: PayloadProviderOperation,
     entityKey: Hex,
-    payload: Uint8Array,
-    contentType: string,
   ): { payload: Hex; contentType: string } => {
-    if (payloadProviderConfig?.transactionPayload !== "reference") {
-      return { payload: toHex(payload), contentType }
-    }
-
     const submission = payloadReceiptByKey.get(payloadReceiptKey(operation, entityKey))
     if (!submission?.reference) {
       throw new Error(`Missing payload provider reference for ${operation} ${entityKey}`)
@@ -290,7 +289,7 @@ export async function sendArkivTransaction(
   const operations = [
     ...(creates ?? []).map((item, i) => {
       const entityKey = createdEntityKeys[i]
-      const encoded = payloadForOperation("create", entityKey, item.payload, item.contentType)
+      const encoded = payloadForOperation("create", entityKey)
       return {
         operationType: EntityOperationType.Create,
         entityKey,
@@ -302,7 +301,7 @@ export async function sendArkivTransaction(
       }
     }),
     ...(updates ?? []).map((item) => {
-      const encoded = payloadForOperation("update", item.entityKey, item.payload, item.contentType)
+      const encoded = payloadForOperation("update", item.entityKey)
       return {
         operationType: EntityOperationType.Update,
         entityKey: item.entityKey,
@@ -432,21 +431,19 @@ async function submitPayloadsToProviderIfConfigured(
       }
 
       let verification: PayloadProviderSubmission["verification"]
-      if (config.verifyReceipt || config.transactionPayload === "reference") {
-        if (!response.payload.signature) {
-          throw new Error("Payload provider response did not include a receipt signature")
-        }
+      if (!response.payload.signature) {
+        throw new Error("Payload provider response did not include a receipt signature")
+      }
 
-        verification = await verifyPayloadProviderSignature(
-          response.payload,
-          response.payload.signature,
-          { nonce, payment },
+      verification = await verifyPayloadProviderSignature(
+        response.payload,
+        response.payload.signature,
+        { nonce, payment },
+      )
+      if (!verification.valid) {
+        throw new Error(
+          `Payload provider receipt verification failed: ${verification.errors.join("; ")}`,
         )
-        if (!verification.valid) {
-          throw new Error(
-            `Payload provider receipt verification failed: ${verification.errors.join("; ")}`,
-          )
-        }
       }
 
       const submission: PayloadProviderSubmission = {
@@ -459,9 +456,7 @@ async function submitPayloadsToProviderIfConfigured(
         nonce,
         payment,
       }
-      if (config.transactionPayload === "reference") {
-        submission.reference = buildPayloadReference(submission)
-      }
+      submission.reference = buildPayloadReference(submission)
       if (verification) submission.verification = verification
 
       return submission

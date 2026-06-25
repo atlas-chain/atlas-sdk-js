@@ -1,7 +1,7 @@
 import type { Hex } from "viem"
 import type { ArkivClient } from "../clients/baseClient"
 import type { RpcOrderByAttribute } from "../types/rpcSchema"
-import { entityFromRpcResult } from "../utils/entities"
+import { entityFromRpcResult, hydrateEntityPayloads } from "../utils/entities"
 import { processQuery } from "./engine"
 import type { Predicate } from "./predicate"
 import { QueryResult } from "./queryResult"
@@ -189,7 +189,7 @@ export class QueryBuilder {
   }
 
   /**
-   * Sets the withPayload flag which will return the payload for the entities if true
+   * Sets the withPayload flag which will download payloads from the configured payload provider if true.
    * @param withPayload - The boolean value to set
    * @returns The QueryBuilder instance
    *
@@ -297,6 +297,9 @@ export class QueryBuilder {
     const entities = await Promise.all(
       queryResult.data.map((entity) => entityFromRpcResult(entity)),
     )
+    if (this._withPayload) {
+      await hydrateEntityPayloads(this._client, entities)
+    }
 
     this.cursor(queryResult.cursor)
     this.validAtBlock(BigInt(queryResult.blockNumber ?? 0))

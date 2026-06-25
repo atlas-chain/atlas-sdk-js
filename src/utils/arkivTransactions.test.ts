@@ -23,6 +23,7 @@ const PROVIDER_PRIVATE_KEY =
 describe("arkiv transaction encoding", () => {
   test("encodes numeric attributes as byte-aligned uint256 words", async () => {
     const client = createMockWalletClient()
+    setSignedPayloadProvider(client, new Uint8Array(), "application/octet-stream")
 
     await sendArkivTransaction(client, {
       creates: [
@@ -78,35 +79,31 @@ describe("arkiv transaction encoding", () => {
       expect(body.nonce).toMatch(/^0x[0-9a-f]{64}$/)
       expect(body.payment).toBe(PAYLOAD_REFERENCE_PAYMENT)
 
-      return new Response(
-        JSON.stringify({
-          ok: true,
-          created: true,
-          arkiv: {
-            namespace: "arkiv.entities",
-            contentType: "text/plain",
-            payloadEncoding: "base64",
-            attributes: [],
-            expiresIn: 120,
-            entityKey: body.entityKey,
-          },
-          payload: {
-            id: expectedPayloadId,
-            namespace: "arkiv.entities",
-            contentType: "text/plain",
-            sizeBytes: payload.length,
-            checksum: expectedChecksum,
-            submittedAt: "2026-06-24T00:00:00Z",
-          },
-        }),
-        { status: 201 },
-      )
+      const submittedAt = "2026-06-24T00:00:00Z"
+      const receipt = {
+        service: "atlas-payload-provider",
+        action: "payloadReceived",
+        payloadId: expectedPayloadId,
+        namespace: "arkiv.entities",
+        checksum: expectedChecksum,
+        sizeBytes: payload.length,
+        submittedAt,
+        nonce: body.nonce,
+        payment: body.payment,
+      }
+      const signature = await signReceipt(receipt)
+
+      return payloadProviderResponse({
+        body,
+        payload,
+        contentType: "text/plain",
+        submittedAt,
+        signature,
+      })
     })
 
     setPayloadProviderConfig(client, {
       url: "https://payload.example",
-      verifyReceipt: false,
-      transactionPayload: "inline",
       fetch: fetchMock as unknown as typeof fetch,
     })
 
@@ -130,7 +127,8 @@ describe("arkiv transaction encoding", () => {
 
     const [{ args }] = client.writeContract.mock.calls[0]
     const [operations] = args
-    expect(operations[0].payload).toBe(toHex(payload))
+    expect(decodeMime128(operations[0].contentType.data)).toBe(PAYLOAD_REFERENCE_CONTENT_TYPE)
+    expect(JSON.parse(hexToUtf8(operations[0].payload)).id).toBe(expectedPayloadId)
   })
 
   test("uses signed payload reference as the transaction payload by default", async () => {
@@ -270,6 +268,72 @@ async function signReceipt(receipt: {
     s: parsedSignature.s,
     v,
   }
+}
+
+function setSignedPayloadProvider(client: ArkivClient, payload: Uint8Array, contentType: string) {
+  const fetchMock = jest.fn(async (_url: string, init?: RequestInit) => {
+    const body = JSON.parse(init?.body as string)
+    const submittedAt = "2026-06-24T00:00:00Z"
+    const receipt = {
+      service: "atlas-payload-provider",
+      action: "payloadReceived",
+      payloadId: payloadProviderPayloadId("arkiv.entities", payload),
+      namespace: "arkiv.entities",
+      checksum: payloadProviderChecksum(payload),
+      sizeBytes: payload.length,
+      submittedAt,
+      nonce: body.nonce,
+      payment: body.payment,
+    }
+    const signature = await signReceipt(receipt)
+    return payloadProviderResponse({ body, payload, contentType, submittedAt, signature })
+  })
+
+  setPayloadProviderConfig(client, {
+    url: "https://payload.example",
+    fetch: fetchMock as unknown as typeof fetch,
+  })
+}
+
+function payloadProviderResponse({
+  body,
+  payload,
+  contentType,
+  submittedAt,
+  signature,
+}: {
+  body: { entityKey: Hex; nonce: Hex; payment: number }
+  payload: Uint8Array
+  contentType: string
+  submittedAt: string
+  signature: Awaited<ReturnType<typeof signReceipt>>
+}) {
+  return new Response(
+    JSON.stringify({
+      ok: true,
+      created: true,
+      arkiv: {
+        namespace: "arkiv.entities",
+        contentType,
+        payloadEncoding: "base64",
+        attributes: [],
+        expiresIn: 120,
+        entityKey: body.entityKey,
+        nonce: body.nonce,
+        payment: body.payment,
+      },
+      payload: {
+        id: payloadProviderPayloadId("arkiv.entities", payload),
+        namespace: "arkiv.entities",
+        contentType,
+        sizeBytes: payload.length,
+        checksum: payloadProviderChecksum(payload),
+        submittedAt,
+        signature,
+      },
+    }),
+    { status: 201 },
+  )
 }
 
 function hexToUtf8(value: Hex): string {

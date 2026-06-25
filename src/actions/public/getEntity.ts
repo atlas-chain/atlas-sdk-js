@@ -1,9 +1,18 @@
 import { bytesToHex, type Hex, hexToBytes } from "viem"
 import type { ArkivClient } from "../../clients/baseClient"
 import { NoEntityFoundError } from "../../errors"
-import { entityFromRpcResult } from "../../utils/entities"
+import {
+  entityFromRpcResult,
+  type HydratePayloadOptions,
+  hydrateEntityPayloads,
+} from "../../utils/entities"
 
-export async function getEntity(client: ArkivClient, key: Hex) {
+export type GetEntityOptions = {
+  hydratePayload?: boolean
+  payloadProvider?: HydratePayloadOptions["payloadProvider"]
+}
+
+export async function getEntity(client: ArkivClient, key: Hex, options: GetEntityOptions = {}) {
   // Normalize the key into bytes
   let bytes: Uint8Array
   try {
@@ -28,7 +37,7 @@ export async function getEntity(client: ArkivClient, key: Hex) {
         includeData: {
           key: true,
           attributes: true,
-          payload: true,
+          payloadReference: true,
           contentType: true,
           expiration: true,
           owner: true,
@@ -46,5 +55,11 @@ export async function getEntity(client: ArkivClient, key: Hex) {
     throw new NoEntityFoundError()
   }
 
-  return await entityFromRpcResult(result.data[0])
+  const entity = await entityFromRpcResult(result.data[0])
+  if (options.hydratePayload) {
+    await hydrateEntityPayloads(client, [entity], {
+      ...(options.payloadProvider && { payloadProvider: options.payloadProvider }),
+    })
+  }
+  return entity
 }

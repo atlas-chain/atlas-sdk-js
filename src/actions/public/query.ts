@@ -2,10 +2,15 @@ import { numberToHex } from "viem"
 import type { ArkivClient } from "../../clients/baseClient"
 import type { Entity } from "../../types/entity"
 import type { RpcQueryOptions } from "../../types/rpcSchema"
-import { entityFromRpcResult } from "../../utils/entities"
+import {
+  entityFromRpcResult,
+  type HydratePayloadOptions,
+  hydrateEntityPayloads,
+} from "../../utils/entities"
 
 export type QueryOptionsIncludeData = {
   attributes?: boolean
+  payloadReference?: boolean
   payload?: boolean
   metadata?: boolean
 }
@@ -21,6 +26,9 @@ export type QueryOptions = {
   orderBy?: QueryOptionsOrderBy[]
   resultsPerPage?: number | undefined
   cursor?: string | undefined
+  hydratePayloads?: boolean
+  payloadProvider?: HydratePayloadOptions["payloadProvider"]
+  payloadProviderConcurrency?: number
 }
 
 export type QueryReturnType = {
@@ -33,7 +41,11 @@ export async function query(client: ArkivClient, query: string, queryOptions?: Q
   const rpcQueryOptions: RpcQueryOptions = {
     includeData: {
       key: true,
-      payload: queryOptions?.includeData?.payload ?? true,
+      payloadReference:
+        queryOptions?.includeData?.payloadReference ??
+        queryOptions?.includeData?.payload ??
+        queryOptions?.hydratePayloads ??
+        true,
       attributes: queryOptions?.includeData?.attributes ?? false,
       contentType: queryOptions?.includeData?.metadata ?? false,
       expiration: queryOptions?.includeData?.metadata ?? false,
@@ -64,6 +76,14 @@ export async function query(client: ArkivClient, query: string, queryOptions?: Q
   })
 
   const entities = await Promise.all(result.data.map((entity) => entityFromRpcResult(entity)))
+  if (queryOptions?.hydratePayloads) {
+    await hydrateEntityPayloads(client, entities, {
+      ...(queryOptions.payloadProvider && { payloadProvider: queryOptions.payloadProvider }),
+      ...(queryOptions.payloadProviderConcurrency !== undefined && {
+        concurrency: queryOptions.payloadProviderConcurrency,
+      }),
+    })
+  }
 
   return {
     entities,

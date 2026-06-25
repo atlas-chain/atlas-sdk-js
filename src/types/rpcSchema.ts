@@ -1,17 +1,28 @@
 import type { Hex, PublicRpcSchema } from "viem"
 import type { MimeType } from "./mimeTypes"
 
+export type RpcPayloadReference = {
+  provider: string
+  id: string
+  namespace: string
+  contentType?: MimeType | string
+  checksum: string
+  sizeBytes: number
+  submittedAt?: string
+}
+
 export type RpcEntity = {
   key: Hex
-  contentType: MimeType
-  value: string
-  expiresAt: Hex
-  createdAtBlock: Hex
-  lastModifiedAtBlock: Hex
-  transactionIndexInBlock: Hex
-  operationIndexInTransaction: Hex
-  owner: Hex
-  creator: Hex
+  payloadRef?: RpcPayloadReference
+  contentType?: MimeType
+  value?: string
+  expiresAt?: Hex
+  createdAtBlock?: Hex
+  lastModifiedAtBlock?: Hex
+  transactionIndexInBlock?: Hex
+  operationIndexInTransaction?: Hex
+  owner?: Hex
+  creator?: Hex
   stringAttributes?: [{ key: string; value: string }]
   numericAttributes?: [{ key: string; value: Hex }]
 }
@@ -33,6 +44,7 @@ export type RpcQueryOptions = {
 export type RpcIncludeData = {
   key?: boolean
   attributes?: boolean
+  payloadReference?: boolean
   payload?: boolean
   contentType?: boolean
   expiration?: boolean
