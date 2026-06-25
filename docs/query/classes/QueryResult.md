@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: QueryResult
 
-Defined in: [src/query/queryResult.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryResult.ts#L8)
+Defined in: [src/query/queryResult.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/queryResult.ts#L8)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/query/queryResult.ts:8](https://github.com/atlas-chain/atlas-sd
 
 > **new QueryResult**(`entities`, `queryBuilder`, `cursor`, `limit`, `validAtBlock`): `QueryResult`
 
-Defined in: [src/query/queryResult.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryResult.ts#L25)
+Defined in: [src/query/queryResult.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/queryResult.ts#L25)
 
 #### Parameters
 
@@ -48,7 +48,7 @@ Defined in: [src/query/queryResult.ts:25](https://github.com/atlas-chain/atlas-s
 
 > **entities**: [`Entity`](../../main/interfaces/Entity.md)[]
 
-Defined in: [src/query/queryResult.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryResult.ts#L9)
+Defined in: [src/query/queryResult.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/queryResult.ts#L9)
 
 ## Accessors
 
@@ -58,7 +58,7 @@ Defined in: [src/query/queryResult.ts:9](https://github.com/atlas-chain/atlas-sd
 
 > **get** **cursor**(): `string` \| `undefined`
 
-Defined in: [src/query/queryResult.ts:21](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryResult.ts#L21)
+Defined in: [src/query/queryResult.ts:21](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/queryResult.ts#L21)
 
 ##### Returns
 
@@ -72,7 +72,7 @@ Defined in: [src/query/queryResult.ts:21](https://github.com/atlas-chain/atlas-s
 
 > **get** **queryBuilder**(): [`QueryBuilder`](QueryBuilder.md)
 
-Defined in: [src/query/queryResult.ts:17](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryResult.ts#L17)
+Defined in: [src/query/queryResult.ts:17](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/queryResult.ts#L17)
 
 ##### Returns
 
@@ -84,7 +84,7 @@ Defined in: [src/query/queryResult.ts:17](https://github.com/atlas-chain/atlas-s
 
 > **hasNextPage**(): `boolean`
 
-Defined in: [src/query/queryResult.ts:61](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryResult.ts#L61)
+Defined in: [src/query/queryResult.ts:61](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/queryResult.ts#L61)
 
 #### Returns
 
@@ -96,7 +96,7 @@ Defined in: [src/query/queryResult.ts:61](https://github.com/atlas-chain/atlas-s
 
 > **next**(): `Promise`\<`void`\>
 
-Defined in: [src/query/queryResult.ts:40](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/queryResult.ts#L40)
+Defined in: [src/query/queryResult.ts:40](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/queryResult.ts#L40)
 
 #### Returns
 

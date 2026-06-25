@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **OnEntityCreatedEvent** = `object`
 
-Defined in: [src/types/events.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L3)
+Defined in: [src/types/events.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L3)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/events.ts:3](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **entityHash**: `Hex`
 
-Defined in: [src/types/events.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L7)
+Defined in: [src/types/events.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L7)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/events.ts:7](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **entityKey**: `Hex`
 
-Defined in: [src/types/events.ts:4](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L4)
+Defined in: [src/types/events.ts:4](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L4)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/events.ts:4](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **expiresAt**: `number`
 
-Defined in: [src/types/events.ts:6](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L6)
+Defined in: [src/types/events.ts:6](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L6)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/events.ts:6](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **owner**: `Address`
 
-Defined in: [src/types/events.ts:5](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L5)
+Defined in: [src/types/events.ts:5](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L5)

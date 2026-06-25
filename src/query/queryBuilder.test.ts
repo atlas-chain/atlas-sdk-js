@@ -8,8 +8,8 @@ import { asc, QueryBuilder } from "./queryBuilder"
 
 describe("QueryBuilder", () => {
   let mockClient: ArkivClient
-  let mockProcessQuery: any
-  let mockEntityFromRpcResult: any
+  let mockProcessQuery: ReturnType<typeof jest.spyOn>
+  let mockEntityFromRpcResult: ReturnType<typeof jest.spyOn>
 
   beforeEach(() => {
     // Create a mock client

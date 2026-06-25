@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **RpcIncludeData** = `object`
 
-Defined in: [src/types/rpcSchema.ts:33](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L33)
+Defined in: [src/types/rpcSchema.ts:44](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L44)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/rpcSchema.ts:33](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **attributes**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:35](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L35)
+Defined in: [src/types/rpcSchema.ts:46](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L46)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/rpcSchema.ts:35](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **contentType**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:37](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L37)
+Defined in: [src/types/rpcSchema.ts:49](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L49)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/rpcSchema.ts:37](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **createdAtBlock**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:41](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L41)
+Defined in: [src/types/rpcSchema.ts:53](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L53)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/rpcSchema.ts:41](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **creator**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:40](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L40)
+Defined in: [src/types/rpcSchema.ts:52](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L52)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/rpcSchema.ts:40](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **expiration**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:38](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L38)
+Defined in: [src/types/rpcSchema.ts:50](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L50)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/rpcSchema.ts:38](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **key**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:34](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L34)
+Defined in: [src/types/rpcSchema.ts:45](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L45)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/types/rpcSchema.ts:34](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **lastModifiedAtBlock**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:42](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L42)
+Defined in: [src/types/rpcSchema.ts:54](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L54)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/types/rpcSchema.ts:42](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **operationIndexInTransaction**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:44](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L44)
+Defined in: [src/types/rpcSchema.ts:56](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L56)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [src/types/rpcSchema.ts:44](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **owner**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:39](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L39)
+Defined in: [src/types/rpcSchema.ts:51](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L51)
 
 ***
 
@@ -88,7 +88,15 @@ Defined in: [src/types/rpcSchema.ts:39](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **payload**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:36](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L36)
+Defined in: [src/types/rpcSchema.ts:48](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L48)
+
+***
+
+### payloadReference?
+
+> `optional` **payloadReference**: `boolean`
+
+Defined in: [src/types/rpcSchema.ts:47](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L47)
 
 ***
 
@@ -96,4 +104,4 @@ Defined in: [src/types/rpcSchema.ts:36](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **transactionIndexInBlock**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:43](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L43)
+Defined in: [src/types/rpcSchema.ts:55](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L55)

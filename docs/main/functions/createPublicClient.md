@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createPublicClient**\<`transport`, `chain`, `accountOrAddress`, `rpcSchema`\>(`parameters`): `object`
 
-Defined in: [src/clients/createPublicClient.ts:44](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/clients/createPublicClient.ts#L44)
+Defined in: [src/clients/createPublicClient.ts:55](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/clients/createPublicClient.ts#L55)
 
 Creates a Public Client with a given [Transport](https://viem.sh/docs/clients/intro) configured for a [Chain](https://viem.sh/docs/clients/chains).
 
@@ -37,6 +37,8 @@ A Public Client is an interface to "public" [Ethereum JSON-RPC API](https://ethe
 ## Parameters
 
 ### parameters
+
+[`PublicArkivClientConfig`](../type-aliases/PublicArkivClientConfig.md)\<`transport`, `chain`, `accountOrAddress`, `rpcSchema`\>
 
 Configuration object for the public client (chain, transport, etc.)
 
@@ -138,7 +140,7 @@ const client = createPublicClient({
 const entity = await client.getEntity("0x123")
 // {
 //   key: "0x123",
-//   value: "0x123",
+//   payloadRef: { id: "...", checksum: "sha256:...", namespace: "arkiv.entities" },
 // }
 ```
 
@@ -173,7 +175,7 @@ const entityCount = await client.getEntityCount()
 > **query**: (`query`, `queryOptions?`) => `Promise`\<[`QueryReturnType`](../type-aliases/QueryReturnType.md)\>
 
 Returns a QueryResult instance for fetching the results of a raw query.
-If no query options are provided, all payload is included, but no metadata (like owner, expiredAt, etc.) and attributes.
+If no query options are provided, payload references are included, but raw payload bytes are not returned by Arkiv RPC.
 
 #### Parameters
 
@@ -206,19 +208,21 @@ const client = createPublicClient({
   transport: http(),
 })
 const queryResult = client.query('key = value && $owner = 0x123')
-// queryResult = { entities: [{ key: "0x123", value: "0x123" }], cursor: undefined, blockNumber: undefined }
+// queryResult = { entities: [{ key: "0x123", payloadRef: { id: "..." } }], cursor: undefined, blockNumber: undefined }
 const queryResultWithOptions = client.query('key = value && $owner = 0x123', {
   includeData: {
     attributes: false,
-    payload: true,
+    payloadReference: true,
     metadata: true,
   },
+  hydratePayloads: true,
+  payloadProviderConcurrency: 5,
   orderBy: [{ name: "key", type: "string", desc: "asc" }],
   resultsPerPage: 10,
   cursor: undefined,
   atBlock: undefined,
 })
-// queryResultWithOptions = { entities: [{ key: "0x123", value: "0x123" }], cursor: "...", blockNumber: 32223n }
+// queryResultWithOptions = { entities: [{ key: "0x123", payload: Uint8Array }], cursor: "...", blockNumber: 32223n }
 ```
 
 ### subscribeEntityEvents()

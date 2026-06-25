@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../index.md)
+[**@atlas-chain/sdk v0.6.11**](../index.md)
 
 ***
 

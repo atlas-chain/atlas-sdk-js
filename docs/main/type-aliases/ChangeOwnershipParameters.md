@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **ChangeOwnershipParameters** = `object`
 
-Defined in: [src/actions/wallet/changeOwnership.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/changeOwnership.ts#L14)
+Defined in: [src/actions/wallet/changeOwnership.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/changeOwnership.ts#L14)
 
 Parameters for the changeOwnership function.
 - entityKey: The key of the entity.
@@ -20,7 +20,7 @@ Parameters for the changeOwnership function.
 
 > **entityKey**: `Hex`
 
-Defined in: [src/actions/wallet/changeOwnership.ts:15](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/changeOwnership.ts#L15)
+Defined in: [src/actions/wallet/changeOwnership.ts:15](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/changeOwnership.ts#L15)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [src/actions/wallet/changeOwnership.ts:15](https://github.com/atlas-
 
 > **newOwner**: `Hex`
 
-Defined in: [src/actions/wallet/changeOwnership.ts:16](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/changeOwnership.ts#L16)
+Defined in: [src/actions/wallet/changeOwnership.ts:16](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/changeOwnership.ts#L16)

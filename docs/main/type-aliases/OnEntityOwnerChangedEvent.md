@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **OnEntityOwnerChangedEvent** = `object`
 
-Defined in: [src/types/events.ts:34](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L34)
+Defined in: [src/types/events.ts:34](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L34)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/events.ts:34](https://github.com/atlas-chain/atlas-sdk-js
 
 > **entityHash**: `Hex`
 
-Defined in: [src/types/events.ts:37](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L37)
+Defined in: [src/types/events.ts:37](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L37)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/events.ts:37](https://github.com/atlas-chain/atlas-sdk-js
 
 > **entityKey**: `Hex`
 
-Defined in: [src/types/events.ts:35](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L35)
+Defined in: [src/types/events.ts:35](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L35)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/events.ts:35](https://github.com/atlas-chain/atlas-sdk-js
 
 > **owner**: `Address`
 
-Defined in: [src/types/events.ts:36](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/events.ts#L36)
+Defined in: [src/types/events.ts:36](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/events.ts#L36)

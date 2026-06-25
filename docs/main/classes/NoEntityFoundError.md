@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: NoEntityFoundError
 
-Defined in: [src/errors.ts:22](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/errors.ts#L22)
+Defined in: [src/errors.ts:22](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/errors.ts#L22)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/errors.ts:22](https://github.com/atlas-chain/atlas-sdk-js/blob/
 
 > **new NoEntityFoundError**(): `NoEntityFoundError`
 
-Defined in: [src/errors.ts:23](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/errors.ts#L23)
+Defined in: [src/errors.ts:23](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/errors.ts#L23)
 
 #### Returns
 

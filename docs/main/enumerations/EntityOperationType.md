@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: EntityOperationType
 
-Defined in: [src/types/entity.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L3)
+Defined in: [src/types/entity.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/entity.ts#L3)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [src/types/entity.ts:3](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **Create**: `1`
 
-Defined in: [src/types/entity.ts:4](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L4)
+Defined in: [src/types/entity.ts:4](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/entity.ts#L4)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/entity.ts:4](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **Delete**: `5`
 
-Defined in: [src/types/entity.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L8)
+Defined in: [src/types/entity.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/entity.ts#L8)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/types/entity.ts:8](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **Expire**: `6`
 
-Defined in: [src/types/entity.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L9)
+Defined in: [src/types/entity.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/entity.ts#L9)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/entity.ts:9](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **Extend**: `3`
 
-Defined in: [src/types/entity.ts:6](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L6)
+Defined in: [src/types/entity.ts:6](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/entity.ts#L6)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/types/entity.ts:6](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **Transfer**: `4`
 
-Defined in: [src/types/entity.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L7)
+Defined in: [src/types/entity.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/entity.ts#L7)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [src/types/entity.ts:7](https://github.com/atlas-chain/atlas-sdk-js/
 
 > **Update**: `2`
 
-Defined in: [src/types/entity.ts:5](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/entity.ts#L5)
+Defined in: [src/types/entity.ts:5](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/entity.ts#L5)

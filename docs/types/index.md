@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../index.md)
+[**@atlas-chain/sdk v0.6.11**](../index.md)
 
 ***
 
@@ -146,6 +146,66 @@ Re-exports [OnEntityUpdatedEvent](../main/type-aliases/OnEntityUpdatedEvent.md)
 
 ***
 
+### PayloadProviderArkivContext
+
+Re-exports [PayloadProviderArkivContext](../main/type-aliases/PayloadProviderArkivContext.md)
+
+***
+
+### PayloadProviderConfig
+
+Re-exports [PayloadProviderConfig](../main/type-aliases/PayloadProviderConfig.md)
+
+***
+
+### PayloadProviderMetadata
+
+Re-exports [PayloadProviderMetadata](../main/type-aliases/PayloadProviderMetadata.md)
+
+***
+
+### PayloadProviderOperation
+
+Re-exports [PayloadProviderOperation](../main/type-aliases/PayloadProviderOperation.md)
+
+***
+
+### PayloadProviderReceipt
+
+Re-exports [PayloadProviderReceipt](../main/type-aliases/PayloadProviderReceipt.md)
+
+***
+
+### PayloadProviderSignature
+
+Re-exports [PayloadProviderSignature](../main/type-aliases/PayloadProviderSignature.md)
+
+***
+
+### PayloadProviderSubmission
+
+Re-exports [PayloadProviderSubmission](../main/type-aliases/PayloadProviderSubmission.md)
+
+***
+
+### PayloadProviderVerificationContext
+
+Re-exports [PayloadProviderVerificationContext](../main/type-aliases/PayloadProviderVerificationContext.md)
+
+***
+
+### PayloadProviderVerificationResult
+
+Re-exports [PayloadProviderVerificationResult](../main/type-aliases/PayloadProviderVerificationResult.md)
+
+***
+
+### PayloadReference
+
+Re-exports [PayloadReference](../main/type-aliases/PayloadReference.md)
+
+***
+
 ### QueryOptions
 
 Re-exports [QueryOptions](../main/type-aliases/QueryOptions.md)
@@ -188,9 +248,27 @@ Re-exports [RpcOrderByAttribute](../main/type-aliases/RpcOrderByAttribute.md)
 
 ***
 
+### RpcPayloadReference
+
+Re-exports [RpcPayloadReference](../main/type-aliases/RpcPayloadReference.md)
+
+***
+
 ### RpcQueryOptions
 
 Re-exports [RpcQueryOptions](../main/type-aliases/RpcQueryOptions.md)
+
+***
+
+### SubmitArkivPayloadInput
+
+Re-exports [SubmitArkivPayloadInput](../main/type-aliases/SubmitArkivPayloadInput.md)
+
+***
+
+### SubmitArkivPayloadResponse
+
+Re-exports [SubmitArkivPayloadResponse](../main/type-aliases/SubmitArkivPayloadResponse.md)
 
 ***
 

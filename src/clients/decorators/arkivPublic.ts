@@ -50,7 +50,7 @@ export type PublicArkivActions<
    * const entity = await client.getEntity("0x123")
    * // {
    * //   key: "0x123",
-   * //   value: "0x123",
+   * //   payloadRef: { id: "...", checksum: "sha256:...", namespace: "arkiv.entities" },
    * // }
    */
   getEntity: (key: Hex) => Promise<Entity>
@@ -79,7 +79,7 @@ export type PublicArkivActions<
 
   /**
    * Returns a QueryResult instance for fetching the results of a raw query.
-   * If no query options are provided, all payload is included, but no metadata (like owner, expiredAt, etc.) and attributes.
+   * If no query options are provided, payload references are included, but raw payload bytes are not returned by Arkiv RPC.
    * @param query - The raw query string
    * @param queryOptions - The optional query options - {@link QueryOptions}
    * @returns A QueryReturnType instance - {@link QueryReturnType}
@@ -93,19 +93,21 @@ export type PublicArkivActions<
    *   transport: http(),
    * })
    * const queryResult = client.query('key = value && $owner = 0x123')
-   * // queryResult = { entities: [{ key: "0x123", value: "0x123" }], cursor: undefined, blockNumber: undefined }
+   * // queryResult = { entities: [{ key: "0x123", payloadRef: { id: "..." } }], cursor: undefined, blockNumber: undefined }
    * const queryResultWithOptions = client.query('key = value && $owner = 0x123', {
    *   includeData: {
    *     attributes: false,
-   *     payload: true,
+   *     payloadReference: true,
    *     metadata: true,
    *   },
+   *   hydratePayloads: true,
+   *   payloadProviderConcurrency: 5,
    *   orderBy: [{ name: "key", type: "string", desc: "asc" }],
    *   resultsPerPage: 10,
    *   cursor: undefined,
    *   atBlock: undefined,
    * })
-   * // queryResultWithOptions = { entities: [{ key: "0x123", value: "0x123" }], cursor: "...", blockNumber: 32223n }
+   * // queryResultWithOptions = { entities: [{ key: "0x123", payload: Uint8Array }], cursor: "...", blockNumber: 32223n }
    */
   query: (query: string, queryOptions?: QueryOptions) => Promise<QueryReturnType>
 

@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **WalletArkivActions**\<`transport`, `chain`, `account`\> = `Pick`\<`PublicActions`\<`transport`, `chain`, `account`\>, `"waitForTransactionReceipt"` \| `"call"` \| `"simulateContract"` \| `"readContract"` \| `"getBlockNumber"`\> & `Pick`\<`WalletActions`\<`chain`, `account`\>, `"addChain"` \| `"sendCalls"` \| `"waitForCallsStatus"` \| `"sendTransaction"` \| `"sendRawTransaction"` \| `"signMessage"` \| `"signTransaction"` \| `"writeContract"`\> & `object`
 
-Defined in: [src/clients/decorators/arkivWallet.ts:34](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/clients/decorators/arkivWallet.ts#L34)
+Defined in: [src/clients/decorators/arkivWallet.ts:34](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/clients/decorators/arkivWallet.ts#L34)
 
 ## Type Declaration
 

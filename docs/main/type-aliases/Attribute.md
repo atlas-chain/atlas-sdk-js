@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **Attribute** = `object`
 
-Defined in: [src/types/attributes.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L7)
+Defined in: [src/types/attributes.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/attributes.ts#L7)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/attributes.ts:7](https://github.com/atlas-chain/atlas-sdk
 
 > **key**: `string`
 
-Defined in: [src/types/attributes.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L8)
+Defined in: [src/types/attributes.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/attributes.ts#L8)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/attributes.ts:8](https://github.com/atlas-chain/atlas-sdk
 
 > **value**: `string` \| `number`
 
-Defined in: [src/types/attributes.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L9)
+Defined in: [src/types/attributes.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/attributes.ts#L9)

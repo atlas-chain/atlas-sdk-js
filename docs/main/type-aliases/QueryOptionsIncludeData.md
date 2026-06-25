@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **QueryOptionsIncludeData** = `object`
 
-Defined in: [src/actions/public/query.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L7)
+Defined in: [src/actions/public/query.ts:11](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/query.ts#L11)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/actions/public/query.ts:7](https://github.com/atlas-chain/atlas
 
 > `optional` **attributes**: `boolean`
 
-Defined in: [src/actions/public/query.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L8)
+Defined in: [src/actions/public/query.ts:12](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/query.ts#L12)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/actions/public/query.ts:8](https://github.com/atlas-chain/atlas
 
 > `optional` **metadata**: `boolean`
 
-Defined in: [src/actions/public/query.ts:10](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L10)
+Defined in: [src/actions/public/query.ts:15](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/query.ts#L15)
 
 ***
 
@@ -32,4 +32,12 @@ Defined in: [src/actions/public/query.ts:10](https://github.com/atlas-chain/atla
 
 > `optional` **payload**: `boolean`
 
-Defined in: [src/actions/public/query.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/query.ts#L9)
+Defined in: [src/actions/public/query.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/query.ts#L14)
+
+***
+
+### payloadReference?
+
+> `optional` **payloadReference**: `boolean`
+
+Defined in: [src/actions/public/query.ts:13](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/query.ts#L13)

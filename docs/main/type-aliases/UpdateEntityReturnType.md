@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **UpdateEntityReturnType** = `object`
 
-Defined in: [src/actions/wallet/updateEntity.ts:30](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/updateEntity.ts#L30)
+Defined in: [src/actions/wallet/updateEntity.ts:31](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/updateEntity.ts#L31)
 
 Return type for the updateEntity function.
 - entityKey: The key of the entity.
@@ -20,7 +20,15 @@ Return type for the updateEntity function.
 
 > **entityKey**: `Hex`
 
-Defined in: [src/actions/wallet/updateEntity.ts:31](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/updateEntity.ts#L31)
+Defined in: [src/actions/wallet/updateEntity.ts:32](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/updateEntity.ts#L32)
+
+***
+
+### payloadReceipt?
+
+> `optional` **payloadReceipt**: [`PayloadProviderSubmission`](PayloadProviderSubmission.md)
+
+Defined in: [src/actions/wallet/updateEntity.ts:34](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/updateEntity.ts#L34)
 
 ***
 
@@ -28,4 +36,4 @@ Defined in: [src/actions/wallet/updateEntity.ts:31](https://github.com/atlas-cha
 
 > **txHash**: `Hash`
 
-Defined in: [src/actions/wallet/updateEntity.ts:32](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/updateEntity.ts#L32)
+Defined in: [src/actions/wallet/updateEntity.ts:33](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/updateEntity.ts#L33)

@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **GetBlockTimingReturnType** = `object`
 
-Defined in: [src/actions/public/getBlockTiming.ts:6](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/getBlockTiming.ts#L6)
+Defined in: [src/actions/public/getBlockTiming.ts:6](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/getBlockTiming.ts#L6)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/actions/public/getBlockTiming.ts:6](https://github.com/atlas-ch
 
 > **blockDuration**: `number`
 
-Defined in: [src/actions/public/getBlockTiming.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/getBlockTiming.ts#L9)
+Defined in: [src/actions/public/getBlockTiming.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/getBlockTiming.ts#L9)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/actions/public/getBlockTiming.ts:9](https://github.com/atlas-ch
 
 > **currentBlock**: `bigint`
 
-Defined in: [src/actions/public/getBlockTiming.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/getBlockTiming.ts#L7)
+Defined in: [src/actions/public/getBlockTiming.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/getBlockTiming.ts#L7)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/actions/public/getBlockTiming.ts:7](https://github.com/atlas-ch
 
 > **currentBlockTime**: `number`
 
-Defined in: [src/actions/public/getBlockTiming.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/public/getBlockTiming.ts#L8)
+Defined in: [src/actions/public/getBlockTiming.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/public/getBlockTiming.ts#L8)

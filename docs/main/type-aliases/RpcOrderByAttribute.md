@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **RpcOrderByAttribute** = `object`
 
-Defined in: [src/types/rpcSchema.ts:19](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L19)
+Defined in: [src/types/rpcSchema.ts:30](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L30)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/rpcSchema.ts:19](https://github.com/atlas-chain/atlas-sdk
 
 > **desc**: `boolean`
 
-Defined in: [src/types/rpcSchema.ts:22](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L22)
+Defined in: [src/types/rpcSchema.ts:33](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L33)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/rpcSchema.ts:22](https://github.com/atlas-chain/atlas-sdk
 
 > **name**: `string`
 
-Defined in: [src/types/rpcSchema.ts:20](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L20)
+Defined in: [src/types/rpcSchema.ts:31](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L31)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/rpcSchema.ts:20](https://github.com/atlas-chain/atlas-sdk
 
 > **type**: `"string"` \| `"numeric"`
 
-Defined in: [src/types/rpcSchema.ts:21](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L21)
+Defined in: [src/types/rpcSchema.ts:32](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L32)

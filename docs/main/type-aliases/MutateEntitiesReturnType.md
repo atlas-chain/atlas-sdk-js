@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **MutateEntitiesReturnType** = `object`
 
-Defined in: [src/actions/wallet/mutateEntities.ts:38](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/mutateEntities.ts#L38)
+Defined in: [src/actions/wallet/mutateEntities.ts:39](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L39)
 
 Return type for the mutateEntities function.
 - txHash: The transaction hash.
@@ -24,7 +24,7 @@ Return type for the mutateEntities function.
 
 > **createdEntities**: `Hex`[]
 
-Defined in: [src/actions/wallet/mutateEntities.ts:40](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/mutateEntities.ts#L40)
+Defined in: [src/actions/wallet/mutateEntities.ts:41](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L41)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/actions/wallet/mutateEntities.ts:40](https://github.com/atlas-c
 
 > **deletedEntities**: `Hex`[]
 
-Defined in: [src/actions/wallet/mutateEntities.ts:42](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/mutateEntities.ts#L42)
+Defined in: [src/actions/wallet/mutateEntities.ts:43](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L43)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/actions/wallet/mutateEntities.ts:42](https://github.com/atlas-c
 
 > **extendedEntities**: `Hex`[]
 
-Defined in: [src/actions/wallet/mutateEntities.ts:43](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/mutateEntities.ts#L43)
+Defined in: [src/actions/wallet/mutateEntities.ts:44](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L44)
 
 ***
 
@@ -48,7 +48,15 @@ Defined in: [src/actions/wallet/mutateEntities.ts:43](https://github.com/atlas-c
 
 > **ownershipChanges**: `Hex`[]
 
-Defined in: [src/actions/wallet/mutateEntities.ts:44](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/mutateEntities.ts#L44)
+Defined in: [src/actions/wallet/mutateEntities.ts:45](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L45)
+
+***
+
+### payloadReceipts?
+
+> `optional` **payloadReceipts**: [`PayloadProviderSubmission`](PayloadProviderSubmission.md)[]
+
+Defined in: [src/actions/wallet/mutateEntities.ts:46](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L46)
 
 ***
 
@@ -56,7 +64,7 @@ Defined in: [src/actions/wallet/mutateEntities.ts:44](https://github.com/atlas-c
 
 > **txHash**: `Hash`
 
-Defined in: [src/actions/wallet/mutateEntities.ts:39](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/mutateEntities.ts#L39)
+Defined in: [src/actions/wallet/mutateEntities.ts:40](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L40)
 
 ***
 
@@ -64,4 +72,4 @@ Defined in: [src/actions/wallet/mutateEntities.ts:39](https://github.com/atlas-c
 
 > **updatedEntities**: `Hex`[]
 
-Defined in: [src/actions/wallet/mutateEntities.ts:41](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/mutateEntities.ts#L41)
+Defined in: [src/actions/wallet/mutateEntities.ts:42](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/mutateEntities.ts#L42)

@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **RpcQueryOptions** = `object`
 
-Defined in: [src/types/rpcSchema.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L25)
+Defined in: [src/types/rpcSchema.ts:36](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L36)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [src/types/rpcSchema.ts:25](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **atBlock**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L26)
+Defined in: [src/types/rpcSchema.ts:37](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L37)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/rpcSchema.ts:26](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **cursor**: `string`
 
-Defined in: [src/types/rpcSchema.ts:30](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L30)
+Defined in: [src/types/rpcSchema.ts:41](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L41)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/rpcSchema.ts:30](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **includeData**: [`RpcIncludeData`](RpcIncludeData.md)
 
-Defined in: [src/types/rpcSchema.ts:27](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L27)
+Defined in: [src/types/rpcSchema.ts:38](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L38)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/rpcSchema.ts:27](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **orderBy**: [`RpcOrderByAttribute`](RpcOrderByAttribute.md)[]
 
-Defined in: [src/types/rpcSchema.ts:28](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L28)
+Defined in: [src/types/rpcSchema.ts:39](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L39)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/rpcSchema.ts:28](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **resultsPerPage**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:29](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L29)
+Defined in: [src/types/rpcSchema.ts:40](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L40)

@@ -7,7 +7,7 @@ export * from "viem"
 
 // export main arkiv stuff
 export type { ArkivClient } from "./clients/baseClient"
-export type { PublicArkivClient } from "./clients/createPublicClient"
+export type { PublicArkivClient, PublicArkivClientConfig } from "./clients/createPublicClient"
 export { createPublicClient } from "./clients/createPublicClient"
 export type { WalletArkivClient, WalletArkivClientConfig } from "./clients/createWalletClient"
 export { createWalletClient } from "./clients/createWalletClient"
@@ -20,4 +20,5 @@ export * from "./payloadProvider"
 export * from "./types"
 // re-export chosen utils
 export { chainFromName } from "./utils/chains"
+export type { HydratePayloadOptions } from "./utils/entities"
 export { jsonToPayload, stringToPayload } from "./utils/payload"

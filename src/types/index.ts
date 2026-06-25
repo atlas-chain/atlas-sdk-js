@@ -49,6 +49,7 @@ export type {
   RpcEntity,
   RpcIncludeData,
   RpcOrderByAttribute,
+  RpcPayloadReference,
   RpcQueryOptions,
 } from "./rpcSchema"
 export type { TxParams } from "./txParams"

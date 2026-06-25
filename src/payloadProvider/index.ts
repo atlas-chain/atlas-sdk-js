@@ -2,6 +2,7 @@ export { bytesToBase64, PayloadProviderClient } from "./client"
 export {
   DEFAULT_PAYLOAD_PROVIDER_NAMESPACE,
   getPayloadProviderConfig,
+  type NormalizedPayloadProviderConfig,
   setPayloadProviderConfig,
 } from "./config"
 export {

@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **ExtendEntityReturnType** = `object`
 
-Defined in: [src/actions/wallet/extendEntity.ts:24](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/extendEntity.ts#L24)
+Defined in: [src/actions/wallet/extendEntity.ts:24](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/extendEntity.ts#L24)
 
 Return type for the extendEntity function.
 - entityKey: The key of the entity.
@@ -20,7 +20,7 @@ Return type for the extendEntity function.
 
 > **entityKey**: `Hex`
 
-Defined in: [src/actions/wallet/extendEntity.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/extendEntity.ts#L25)
+Defined in: [src/actions/wallet/extendEntity.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/extendEntity.ts#L25)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [src/actions/wallet/extendEntity.ts:25](https://github.com/atlas-cha
 
 > **txHash**: `Hash`
 
-Defined in: [src/actions/wallet/extendEntity.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/actions/wallet/extendEntity.ts#L26)
+Defined in: [src/actions/wallet/extendEntity.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/actions/wallet/extendEntity.ts#L26)

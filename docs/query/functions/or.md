@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **or**(`predicates`): [`Predicate`](../type-aliases/Predicate.md)
 
-Defined in: [src/query/predicate.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/query/predicate.ts#L26)
+Defined in: [src/query/predicate.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/query/predicate.ts#L26)
 
 Creates an OR predicate
 

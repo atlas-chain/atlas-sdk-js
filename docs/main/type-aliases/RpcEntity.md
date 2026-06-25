@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,39 +8,39 @@
 
 > **RpcEntity** = `object`
 
-Defined in: [src/types/rpcSchema.ts:4](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L4)
+Defined in: [src/types/rpcSchema.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L14)
 
 ## Properties
 
-### contentType
+### contentType?
 
-> **contentType**: [`MimeType`](MimeType.md)
+> `optional` **contentType**: [`MimeType`](MimeType.md)
 
-Defined in: [src/types/rpcSchema.ts:6](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L6)
-
-***
-
-### createdAtBlock
-
-> **createdAtBlock**: `Hex`
-
-Defined in: [src/types/rpcSchema.ts:9](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L9)
+Defined in: [src/types/rpcSchema.ts:17](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L17)
 
 ***
 
-### creator
+### createdAtBlock?
 
-> **creator**: `Hex`
+> `optional` **createdAtBlock**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:14](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L14)
+Defined in: [src/types/rpcSchema.ts:20](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L20)
 
 ***
 
-### expiresAt
+### creator?
 
-> **expiresAt**: `Hex`
+> `optional` **creator**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:8](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L8)
+Defined in: [src/types/rpcSchema.ts:25](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L25)
+
+***
+
+### expiresAt?
+
+> `optional` **expiresAt**: `Hex`
+
+Defined in: [src/types/rpcSchema.ts:19](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L19)
 
 ***
 
@@ -48,15 +48,15 @@ Defined in: [src/types/rpcSchema.ts:8](https://github.com/atlas-chain/atlas-sdk-
 
 > **key**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:5](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L5)
+Defined in: [src/types/rpcSchema.ts:15](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L15)
 
 ***
 
-### lastModifiedAtBlock
+### lastModifiedAtBlock?
 
-> **lastModifiedAtBlock**: `Hex`
+> `optional` **lastModifiedAtBlock**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:10](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L10)
+Defined in: [src/types/rpcSchema.ts:21](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L21)
 
 ***
 
@@ -64,23 +64,31 @@ Defined in: [src/types/rpcSchema.ts:10](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **numericAttributes**: \[\{ `key`: `string`; `value`: `Hex`; \}\]
 
-Defined in: [src/types/rpcSchema.ts:16](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L16)
+Defined in: [src/types/rpcSchema.ts:27](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L27)
 
 ***
 
-### operationIndexInTransaction
+### operationIndexInTransaction?
 
-> **operationIndexInTransaction**: `Hex`
+> `optional` **operationIndexInTransaction**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:12](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L12)
+Defined in: [src/types/rpcSchema.ts:23](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L23)
 
 ***
 
-### owner
+### owner?
 
-> **owner**: `Hex`
+> `optional` **owner**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:13](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L13)
+Defined in: [src/types/rpcSchema.ts:24](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L24)
+
+***
+
+### payloadRef?
+
+> `optional` **payloadRef**: [`RpcPayloadReference`](RpcPayloadReference.md)
+
+Defined in: [src/types/rpcSchema.ts:16](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L16)
 
 ***
 
@@ -88,20 +96,20 @@ Defined in: [src/types/rpcSchema.ts:13](https://github.com/atlas-chain/atlas-sdk
 
 > `optional` **stringAttributes**: \[\{ `key`: `string`; `value`: `string`; \}\]
 
-Defined in: [src/types/rpcSchema.ts:15](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L15)
+Defined in: [src/types/rpcSchema.ts:26](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L26)
 
 ***
 
-### transactionIndexInBlock
+### transactionIndexInBlock?
 
-> **transactionIndexInBlock**: `Hex`
+> `optional` **transactionIndexInBlock**: `Hex`
 
-Defined in: [src/types/rpcSchema.ts:11](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L11)
+Defined in: [src/types/rpcSchema.ts:22](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L22)
 
 ***
 
-### value
+### value?
 
-> **value**: `string`
+> `optional` **value**: `string`
 
-Defined in: [src/types/rpcSchema.ts:7](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/rpcSchema.ts#L7)
+Defined in: [src/types/rpcSchema.ts:18](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/rpcSchema.ts#L18)

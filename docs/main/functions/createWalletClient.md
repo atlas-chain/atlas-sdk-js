@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createWalletClient**\<`transport`, `chain`, `accountOrAddress`, `rpcSchema`\>(`parameters`): `object`
 
-Defined in: [src/clients/createWalletClient.ts:44](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/clients/createWalletClient.ts#L44)
+Defined in: [src/clients/createWalletClient.ts:55](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/clients/createWalletClient.ts#L55)
 
 Creates a Public Client with a given [Transport](https://viem.sh/docs/clients/intro) configured for a [Chain](https://viem.sh/docs/clients/chains).
 
@@ -37,6 +37,8 @@ A Public Client is an interface to "public" [Ethereum JSON-RPC API](https://ethe
 ## Parameters
 
 ### parameters
+
+[`WalletArkivClientConfig`](../type-aliases/WalletArkivClientConfig.md)\<`transport`, `chain`, `accountOrAddress`, `rpcSchema`\>
 
 Configuration object for the wallet client (chain, transport, account, etc.)
 

@@ -1,4 +1,4 @@
-[**@atlas-chain/sdk v0.6.9**](../../index.md)
+[**@atlas-chain/sdk v0.6.11**](../../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: AttributeValueType
 
-Defined in: [src/types/attributes.ts:1](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L1)
+Defined in: [src/types/attributes.ts:1](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/attributes.ts#L1)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [src/types/attributes.ts:1](https://github.com/atlas-chain/atlas-sdk
 
 > **EntityKey**: `3`
 
-Defined in: [src/types/attributes.ts:4](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L4)
+Defined in: [src/types/attributes.ts:4](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/attributes.ts#L4)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/attributes.ts:4](https://github.com/atlas-chain/atlas-sdk
 
 > **String**: `2`
 
-Defined in: [src/types/attributes.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L3)
+Defined in: [src/types/attributes.ts:3](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/attributes.ts#L3)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [src/types/attributes.ts:3](https://github.com/atlas-chain/atlas-sdk
 
 > **Uint**: `1`
 
-Defined in: [src/types/attributes.ts:2](https://github.com/atlas-chain/atlas-sdk-js/blob/0463276bc2e3407da08671d2bac33fc79aa732e1/src/types/attributes.ts#L2)
+Defined in: [src/types/attributes.ts:2](https://github.com/atlas-chain/atlas-sdk-js/blob/e1278b56b35a0b8422e6147e639a35ed04bc71f3/src/types/attributes.ts#L2)

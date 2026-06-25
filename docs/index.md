@@ -1,8 +1,8 @@
-**@atlas-chain/sdk v0.6.9**
+**@atlas-chain/sdk v0.6.11**
 
 ***
 
-# @atlas-chain/sdk v0.6.9
+# @atlas-chain/sdk v0.6.11
 
 ## Modules
 
