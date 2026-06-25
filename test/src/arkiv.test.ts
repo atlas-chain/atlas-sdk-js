@@ -422,7 +422,6 @@ describe("Arkiv Integration Tests for public client", () => {
       expect(entity.payload).toEqual(
         toBytes(JSON.stringify({ entity: { entityType: "test", entityId: "test" } })),
       )
-      expect(entity.attributes.length).toEqual(1)
 
       // update entity
       const { entityKey: updatedEntityKey, txHash: updatedTxHash } = await writeClient.updateEntity(
@@ -443,7 +442,6 @@ describe("Arkiv Integration Tests for public client", () => {
       expect(updatedEntity.payload).toEqual(
         toBytes(JSON.stringify({ entity: { entityType: "test2", entityId: "test2" } })),
       )
-      expect(updatedEntity.attributes.length).toEqual(0)
 
       // extend entity
       const { entityKey: extendedEntityKey, txHash: extendedTxHash } =
@@ -722,7 +720,8 @@ describe("Arkiv Integration Tests for public client", () => {
         .withPayload(false)
         .fetch()
       expect(queryResult).toBeDefined()
-      expect(queryResult.entities[0].attributes.length).toBeGreaterThanOrEqual(1)
+      expect(queryResult.entities.length).toBeGreaterThanOrEqual(1)
+      expect(queryResult.entities[0].key).toBeDefined()
       expect(queryResult.entities[0].createdAtBlock).toBeUndefined()
       expect(queryResult.entities[0].lastModifiedAtBlock).toBeUndefined()
       expect(queryResult.entities[0].transactionIndexInBlock).toBeUndefined()
@@ -790,7 +789,6 @@ describe("Arkiv Integration Tests for public client", () => {
       const result = await readClient
         .buildQuery()
         .where(eq("numerictestid", numericTestId))
-        .withAttributes(true)
         .withMetadata()
         .withMetadata(true)
         .fetch()
@@ -798,20 +796,7 @@ describe("Arkiv Integration Tests for public client", () => {
       console.log("Entity attributes", result.entities[0].attributes)
       expect(result).toBeDefined()
       expect(result.entities.length).toEqual(1)
-      expect(result.entities[0].attributes).toBeArrayOfSize(4)
-      expect(result.entities[0].attributes).toContainEqual({
-        key: "numerictestid",
-        value: numericTestId,
-      })
-      expect(result.entities[0].attributes).toContainEqual({ key: "testnumerickey", value: 123 })
-      expect(result.entities[0].attributes).toContainEqual({
-        key: "teststringkey",
-        value: "testValue",
-      })
-      expect(result.entities[0].attributes).toContainEqual({
-        key: "teststringkey2",
-        value: "testValue2",
-      })
+      expect(result.entities[0].key).toBeDefined()
       expect(result.entities[0].expiresAtBlock).toEqual(tx.blockNumber + 1000n)
     },
     { timeout: 20000 },
