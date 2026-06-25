@@ -116,7 +116,7 @@ jobs:
 
       - name: Pull local test Docker images
         run: |
-          docker pull ghcr.io/atlas-chain/arkiv-node-dev-int:0.1.7
+          docker pull ghcr.io/atlas-chain/arkiv-node-dev-int:v0.1.7
           docker pull ghcr.io/atlas-chain/atlas-payload-provider:v0.1.2
 
       # Using a test private key (randomly generated for testing purposes only)

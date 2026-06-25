@@ -3,7 +3,7 @@ import { GenericContainer, type StartedTestContainer, Wait } from "testcontainer
 
 const ARKIV_NODE_IMAGE =
   process.env.ARKIV_SDK_TEST_ARKIV_NODE_IMAGE ??
-  "ghcr.io/atlas-chain/arkiv-node-dev-int:0.1.7"
+  "ghcr.io/atlas-chain/arkiv-node-dev-int:v0.1.7"
 const PAYLOAD_PROVIDER_IMAGE =
   process.env.ARKIV_SDK_TEST_PAYLOAD_PROVIDER_IMAGE ??
   "ghcr.io/atlas-chain/atlas-payload-provider:v0.1.2"
