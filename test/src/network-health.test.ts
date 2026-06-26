@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import type {
   Hex,
+  PayloadProviderConfig,
   PublicArkivClient,
   WalletArkivClient,
 } from "@atlas-chain/sdk";
@@ -12,7 +13,7 @@ import {
   NoEntityFoundError,
 } from "@atlas-chain/sdk";
 import { privateKeyToAccount } from "@atlas-chain/sdk/accounts";
-import { kaolin, braga } from "@atlas-chain/sdk/chains";
+import { atlas, braga, kaolin } from "@atlas-chain/sdk/chains";
 import { and, eq, gt, gte, lt, lte, neq, or } from "@atlas-chain/sdk/query";
 import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils";
 
@@ -25,7 +26,7 @@ if (!isHex(PRIVATE_KEY)) {
   throw new Error("Malformed PRIVATE_KEY: must be a hex string");
 }
 
-const chains = { kaolin, braga } as const;
+const chains = { atlas, braga, kaolin } as const;
 const chainName = (process.env.CHAIN ?? "braga") as keyof typeof chains;
 const chain = chains[chainName];
 if (!chain) {
@@ -36,18 +37,30 @@ if (!chain) {
 
 const HEALTH_CHECK_URL =
   process.env.HEALTH_CHECK_URL ?? "https://atlas.arkiv-global.net/";
+const PAYLOAD_PROVIDER_INGRESS_URL =
+  process.env.PAYLOAD_PROVIDER_INGRESS_URL ??
+  "https://payload.atlas.arkiv-global.net";
+const PAYLOAD_PROVIDER_INGRESS_BEARER_KEY =
+  process.env.PAYLOAD_PROVIDER_INGRESS_BEARER_KEY ??
+  "atlas-signer-pub-token";
 
 const account = privateKeyToAccount(PRIVATE_KEY);
+const payloadProvider: PayloadProviderConfig = {
+  url: PAYLOAD_PROVIDER_INGRESS_URL,
+  bearerKey: PAYLOAD_PROVIDER_INGRESS_BEARER_KEY,
+};
 
 const publicClient: PublicArkivClient = createPublicClient({
   chain,
   transport: http(),
+  payloadProvider,
 });
 
 const walletClient: WalletArkivClient = createWalletClient({
   chain,
   transport: http(),
   account,
+  payloadProvider,
 });
 
 describe(`Network health check (${chain.name})`, () => {

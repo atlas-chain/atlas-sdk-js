@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { braga, kaolin, localhost } from "../chains"
+import { atlas, braga, kaolin, localhost } from "../chains"
 import { chainFromName } from "./chains"
 
 describe("chainFromName", () => {
@@ -9,6 +9,13 @@ describe("chainFromName", () => {
       expect(chain).toBe(braga)
       expect(chain.id).toBe(60138453102)
       expect(chain.name).toBe("Braga")
+    })
+
+    test("returns atlas chain for 'atlas'", () => {
+      const chain = chainFromName("atlas")
+      expect(chain).toBe(atlas)
+      expect(chain.id).toBe(42069)
+      expect(chain.name).toBe("Atlas")
     })
 
     test("returns kaolin chain for 'kaolin'", () => {
@@ -28,15 +35,18 @@ describe("chainFromName", () => {
 
   describe("case insensitivity", () => {
     test("handles uppercase chain names", () => {
+      expect(chainFromName("ATLAS")).toBe(atlas)
       expect(chainFromName("BRAGA")).toBe(braga)
       expect(chainFromName("KAOLIN")).toBe(kaolin)
       expect(chainFromName("LOCALHOST")).toBe(localhost)
     })
 
     test("handles mixed case chain names", () => {
+      expect(chainFromName("Atlas")).toBe(atlas)
       expect(chainFromName("Braga")).toBe(braga)
       expect(chainFromName("Kaolin")).toBe(kaolin)
       expect(chainFromName("Localhost")).toBe(localhost)
+      expect(chainFromName("aTlAs")).toBe(atlas)
       expect(chainFromName("bRaGa")).toBe(braga)
       expect(chainFromName("kAoLiN")).toBe(kaolin)
     })
