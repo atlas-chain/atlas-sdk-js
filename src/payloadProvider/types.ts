@@ -19,6 +19,7 @@ export type PayloadProviderReceipt = {
   sizeBytes: number
   submittedAt: string
   nonce?: Hex
+  /** Optional signed provider payment gas units. */
   payment?: number
 }
 
@@ -51,6 +52,7 @@ export type PayloadProviderArkivContext = {
   expiresIn?: number
   entityKey?: Hex
   nonce?: Hex
+  /** Optional signed provider payment gas units. */
   payment?: number
 }
 
@@ -62,6 +64,7 @@ export type SubmitArkivPayloadInput = {
   expiresIn: number
   entityKey: Hex
   nonce?: Hex
+  /** Optional signed provider payment gas units. */
   payment?: number
 }
 
@@ -82,6 +85,7 @@ export type PayloadProviderVerificationResult = {
 
 export type PayloadProviderVerificationContext = {
   nonce?: Hex
+  /** Optional signed provider payment gas units. */
   payment?: number
 }
 
@@ -96,6 +100,7 @@ export type PayloadReference = {
   sizeBytes: number
   submittedAt: string
   nonce: Hex
+  /** Signed provider payment gas units. */
   payment: number
   signature: PayloadProviderSignature
 }
@@ -120,6 +125,7 @@ export type PayloadProviderSubmission = {
   arkiv: PayloadProviderArkivContext
   payload: PayloadProviderMetadata
   nonce: Hex
+  /** Signed provider payment gas units. */
   payment: number
   reference?: PayloadReference
   verification?: PayloadProviderVerificationResult
