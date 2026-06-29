@@ -1,17 +1,17 @@
 import { createPublicClient, createWalletClient, http } from "@atlas-chain/sdk"
 import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
-import { braga } from "@atlas-chain/sdk/chains"
+import { atlas } from "@atlas-chain/sdk/chains"
 import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils"
 
 // Create a public client
 const publicClient = createPublicClient({
-  chain: braga, // braga is the Arkiv testnet
+  chain: atlas,
   transport: http(),
 })
 
 // Create a wallet client with an account
 const client = createWalletClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
   account: privateKeyToAccount("0x..."), // Replace with your private key
 })

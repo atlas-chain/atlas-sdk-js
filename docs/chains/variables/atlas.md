@@ -58,4 +58,4 @@ Collection of RPC endpoints
 
 #### rpcUrls.default.http
 
-> `readonly` **http**: readonly \[`"https://rpc.atlas.arkiv-global.net"`\]
+> `readonly` **http**: readonly \[`"https://atlas.arkiv-global.net/"`\]

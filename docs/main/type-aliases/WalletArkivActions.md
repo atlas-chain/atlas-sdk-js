@@ -74,10 +74,10 @@ The created entity with transaction hash
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const { entityKey, txHash } = await client.createEntity({
@@ -126,10 +126,10 @@ The deleted entity with transaction hash
 
 ```ts
 import { createWalletClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createWalletClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const { entityKey, txHash } = await client.deleteEntity({ entityKey: "0x123" })
@@ -174,10 +174,10 @@ The updated entity with transaction hash
 
 ```ts
 import { createWalletClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createWalletClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const { entityKey, txHash } = await client.extendEntity("0x123", {
@@ -224,10 +224,10 @@ The mutation result with transaction hash
 
 ```ts
 import { createWalletClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createWalletClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const { entityKey, txHash } = await client.mutateEntities({
@@ -291,10 +291,10 @@ The updated entity with transaction hash
 
 ```ts
 import { createWalletClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createWalletClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 ```

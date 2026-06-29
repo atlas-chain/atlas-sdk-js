@@ -1,8 +1,8 @@
 const { createPublicClient, http } = require("@atlas-chain/sdk")
-const { braga } = require("@atlas-chain/sdk/chains")
+const { atlas } = require("@atlas-chain/sdk/chains")
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 

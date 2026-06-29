@@ -1,8 +1,8 @@
 import { createPublicClient, http } from "@atlas-chain/sdk"
-import { braga } from "@atlas-chain/sdk/chains"
+import { atlas } from "@atlas-chain/sdk/chains"
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 

@@ -14,7 +14,7 @@ Creates a Public Client with a given [Transport](https://viem.sh/docs/clients/in
 
 - Docs: https://docs.arkiv.network/ts-sdk/clients/public
 
-A Public Client is an interface to "public" [Ethereum JSON-RPC API](https://ethereum.org/en/developers/docs/apis/json-rpc/), [Arkiv JSON-RPC API](https://docs.arkiv.network/json-rpc/), and [Braga JSON-RPC API](https://braga.holesky.arkiv.network/rpc) methods such as retrieving block numbers, transactions, reading from smart contracts, etc through [Public Actions](/docs/actions/public/introduction).
+A Public Client is an interface to "public" [Ethereum JSON-RPC API](https://ethereum.org/en/developers/docs/apis/json-rpc/), [Arkiv JSON-RPC API](https://docs.arkiv.network/json-rpc/), and [Atlas JSON-RPC API](https://atlas.arkiv-global.net/) methods such as retrieving block numbers, transactions, reading from smart contracts, etc through [Public Actions](/docs/actions/public/introduction).
 
 ## Type Parameters
 
@@ -65,10 +65,10 @@ A QueryBuilder instance for building and executing queries. [QueryBuilder](../..
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const query = client.buildQuery()
@@ -91,10 +91,10 @@ The current block timing. [GetBlockTimingReturnType](../type-aliases/GetBlockTim
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const blockTiming = await client.getBlockTiming()
@@ -131,10 +131,10 @@ The entity with the given key. [Entity](../interfaces/Entity.md)
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const entity = await client.getEntity("0x123")
@@ -160,10 +160,10 @@ The number of entities in the DBChain
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const entityCount = await client.getEntityCount()
@@ -201,10 +201,10 @@ A QueryReturnType instance - [QueryReturnType](../type-aliases/QueryReturnType.m
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const queryResult = client.query('key = value && $owner = 0x123')
@@ -282,10 +282,10 @@ A function to unsubscribe from the events
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const unsubscribe = await client.subscribeEntityEvents({
@@ -298,10 +298,10 @@ unsubscribe() // unsubscribe from the events
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 ```

@@ -13,7 +13,7 @@ import {
   NoEntityFoundError,
 } from "@atlas-chain/sdk";
 import { privateKeyToAccount } from "@atlas-chain/sdk/accounts";
-import { atlas, braga, kaolin } from "@atlas-chain/sdk/chains";
+import { atlas, localhost } from "@atlas-chain/sdk/chains";
 import { and, eq, gt, gte, lt, lte, neq, or } from "@atlas-chain/sdk/query";
 import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils";
 
@@ -26,8 +26,8 @@ if (!isHex(PRIVATE_KEY)) {
   throw new Error("Malformed PRIVATE_KEY: must be a hex string");
 }
 
-const chains = { atlas, braga, kaolin } as const;
-const chainName = (process.env.CHAIN ?? "braga") as keyof typeof chains;
+const chains = { atlas, localhost } as const;
+const chainName = (process.env.CHAIN ?? "atlas") as keyof typeof chains;
 const chain = chains[chainName];
 if (!chain) {
   throw new Error(

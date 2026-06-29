@@ -9,6 +9,4 @@
 ## Variables
 
 - [atlas](variables/atlas.md)
-- [braga](variables/braga.md)
-- [~~kaolin~~](variables/kaolin.md)
 - [localhost](variables/localhost.md)

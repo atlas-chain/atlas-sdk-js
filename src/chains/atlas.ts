@@ -11,7 +11,7 @@ export const atlas = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ["https://rpc.atlas.arkiv-global.net"],
+      http: ["https://atlas.arkiv-global.net/"],
     },
   },
 })

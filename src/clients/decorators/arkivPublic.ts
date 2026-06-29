@@ -41,10 +41,10 @@ export type PublicArkivActions<
    *
    * @example
    * import { createPublicClient, http } from 'arkiv'
-   * import { braga } from 'arkiv/chains'
+   * import { atlas } from 'arkiv/chains'
    *
    * const client = createPublicClient({
-   *   chain: braga,
+   *   chain: atlas,
    *   transport: http(),
    * })
    * const entity = await client.getEntity("0x123")
@@ -65,10 +65,10 @@ export type PublicArkivActions<
    *
    * @example
    * import { createPublicClient, http } from 'arkiv'
-   * import { braga } from 'arkiv/chains'
+   * import { atlas } from 'arkiv/chains'
    *
    * const client = createPublicClient({
-   *   chain: braga,
+   *   chain: atlas,
    *   transport: http(),
    * })
    * const query = client.buildQuery()
@@ -86,10 +86,10 @@ export type PublicArkivActions<
    *
    * @example
    * import { createPublicClient, http } from 'arkiv'
-   * import { braga } from 'arkiv/chains'
+   * import { atlas } from 'arkiv/chains'
    *
    * const client = createPublicClient({
-   *   chain: braga,
+   *   chain: atlas,
    *   transport: http(),
    * })
    * const queryResult = client.query('key = value && $owner = 0x123')
@@ -117,10 +117,10 @@ export type PublicArkivActions<
    *
    * @example
    * import { createPublicClient, http } from 'arkiv'
-   * import { braga } from 'arkiv/chains'
+   * import { atlas } from 'arkiv/chains'
    *
    * const client = createPublicClient({
-   *   chain: braga,
+   *   chain: atlas,
    *   transport: http(),
    * })
    * const entityCount = await client.getEntityCount()
@@ -134,10 +134,10 @@ export type PublicArkivActions<
    *
    * @example
    * import { createPublicClient, http } from 'arkiv'
-   * import { braga } from 'arkiv/chains'
+   * import { atlas } from 'arkiv/chains'
    *
    * const client = createPublicClient({
-   *   chain: braga,
+   *   chain: atlas,
    *   transport: http(),
    * })
    * const blockTiming = await client.getBlockTiming()
@@ -162,10 +162,10 @@ export type PublicArkivActions<
    *
    * @example
    * import { createPublicClient, http } from 'arkiv'
-   * import { braga } from 'arkiv/chains'
+   * import { atlas } from 'arkiv/chains'
    *
    * const client = createPublicClient({
-   *   chain: braga,
+   *   chain: atlas,
    *   transport: http(),
    * })
    * const unsubscribe = await client.subscribeEntityEvents({

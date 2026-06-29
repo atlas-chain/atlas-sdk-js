@@ -31,10 +31,10 @@ A QueryBuilder instance for building and executing queries. [QueryBuilder](../..
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const query = client.buildQuery()
@@ -57,10 +57,10 @@ The current block timing. [GetBlockTimingReturnType](GetBlockTimingReturnType.md
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const blockTiming = await client.getBlockTiming()
@@ -97,10 +97,10 @@ The entity with the given key. [Entity](../interfaces/Entity.md)
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const entity = await client.getEntity("0x123")
@@ -126,10 +126,10 @@ The number of entities in the DBChain
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const entityCount = await client.getEntityCount()
@@ -167,10 +167,10 @@ A QueryReturnType instance - [QueryReturnType](QueryReturnType.md)
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const queryResult = client.query('key = value && $owner = 0x123')
@@ -260,10 +260,10 @@ A function to unsubscribe from the events
 
 ```ts
 import { createPublicClient, http } from 'arkiv'
-import { braga } from 'arkiv/chains'
+import { atlas } from 'arkiv/chains'
 
 const client = createPublicClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
 })
 const unsubscribe = await client.subscribeEntityEvents({

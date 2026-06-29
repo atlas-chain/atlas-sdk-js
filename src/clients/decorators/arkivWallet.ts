@@ -62,10 +62,10 @@ export type WalletArkivActions<
      *
      * @example
      * import { createPublicClient, http } from 'arkiv'
-     * import { braga } from 'arkiv/chains'
+     * import { atlas } from 'arkiv/chains'
      *
      * const client = createPublicClient({
-     *   chain: braga,
+     *   chain: atlas,
      *   transport: http(),
      * })
      * const { entityKey, txHash } = await client.createEntity({
@@ -97,10 +97,10 @@ export type WalletArkivActions<
      *
      * @example
      * import { createWalletClient, http } from 'arkiv'
-     * import { braga } from 'arkiv/chains'
+     * import { atlas } from 'arkiv/chains'
      *
      * const client = createWalletClient({
-     *   chain: braga,
+     *   chain: atlas,
      *   transport: http(),
      * })
      */
@@ -121,10 +121,10 @@ export type WalletArkivActions<
      *
      * @example
      * import { createWalletClient, http } from 'arkiv'
-     * import { braga } from 'arkiv/chains'
+     * import { atlas } from 'arkiv/chains'
      *
      * const client = createWalletClient({
-     *   chain: braga,
+     *   chain: atlas,
      *   transport: http(),
      * })
      * const { entityKey, txHash } = await client.deleteEntity({ entityKey: "0x123" })
@@ -152,10 +152,10 @@ export type WalletArkivActions<
      *
      * @example
      * import { createWalletClient, http } from 'arkiv'
-     * import { braga } from 'arkiv/chains'
+     * import { atlas } from 'arkiv/chains'
      *
      * const client = createWalletClient({
-     *   chain: braga,
+     *   chain: atlas,
      *   transport: http(),
      * })
      * const { entityKey, txHash } = await client.extendEntity("0x123", {
@@ -200,10 +200,10 @@ export type WalletArkivActions<
      *
      * @example
      * import { createWalletClient, http } from 'arkiv'
-     * import { braga } from 'arkiv/chains'
+     * import { atlas } from 'arkiv/chains'
      *
      * const client = createWalletClient({
-     *   chain: braga,
+     *   chain: atlas,
      *   transport: http(),
      * })
      * const { entityKey, txHash } = await client.mutateEntities({

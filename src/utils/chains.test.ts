@@ -1,28 +1,15 @@
 import { describe, expect, test } from "bun:test"
-import { atlas, braga, kaolin, localhost } from "../chains"
+import { atlas, localhost } from "../chains"
 import { chainFromName } from "./chains"
 
 describe("chainFromName", () => {
   describe("valid chain names", () => {
-    test("returns braga chain for 'braga'", () => {
-      const chain = chainFromName("braga")
-      expect(chain).toBe(braga)
-      expect(chain.id).toBe(60138453102)
-      expect(chain.name).toBe("Braga")
-    })
-
     test("returns atlas chain for 'atlas'", () => {
       const chain = chainFromName("atlas")
       expect(chain).toBe(atlas)
       expect(chain.id).toBe(42069)
       expect(chain.name).toBe("Atlas")
-    })
-
-    test("returns kaolin chain for 'kaolin'", () => {
-      const chain = chainFromName("kaolin")
-      expect(chain).toBe(kaolin)
-      expect(chain.id).toBe(60138453025)
-      expect(chain.name).toBe("Kaolin")
+      expect(chain.rpcUrls.default.http).toEqual(["https://atlas.arkiv-global.net/"])
     })
 
     test("returns localhost chain for 'localhost'", () => {
@@ -36,19 +23,13 @@ describe("chainFromName", () => {
   describe("case insensitivity", () => {
     test("handles uppercase chain names", () => {
       expect(chainFromName("ATLAS")).toBe(atlas)
-      expect(chainFromName("BRAGA")).toBe(braga)
-      expect(chainFromName("KAOLIN")).toBe(kaolin)
       expect(chainFromName("LOCALHOST")).toBe(localhost)
     })
 
     test("handles mixed case chain names", () => {
       expect(chainFromName("Atlas")).toBe(atlas)
-      expect(chainFromName("Braga")).toBe(braga)
-      expect(chainFromName("Kaolin")).toBe(kaolin)
       expect(chainFromName("Localhost")).toBe(localhost)
       expect(chainFromName("aTlAs")).toBe(atlas)
-      expect(chainFromName("bRaGa")).toBe(braga)
-      expect(chainFromName("kAoLiN")).toBe(kaolin)
     })
   })
 
@@ -62,12 +43,14 @@ describe("chainFromName", () => {
     })
 
     test("throws error for chain name with whitespace", () => {
-      expect(() => chainFromName("kaolin ")).toThrow("Unknown chain: kaolin ")
-      expect(() => chainFromName(" kaolin")).toThrow("Unknown chain:  kaolin")
+      expect(() => chainFromName("atlas ")).toThrow("Unknown chain: atlas ")
+      expect(() => chainFromName(" atlas")).toThrow("Unknown chain:  atlas")
     })
 
     test("throws error for similar but incorrect chain names", () => {
-      expect(() => chainFromName("kaolinn")).toThrow("Unknown chain: kaolinn")
+      expect(() => chainFromName("testnet")).toThrow("Unknown chain: testnet")
+      expect(() => chainFromName("legacy")).toThrow("Unknown chain: legacy")
+      expect(() => chainFromName("atlasa")).toThrow("Unknown chain: atlasa")
       expect(() => chainFromName("mendoza")).toThrow("Unknown chain: mendoza")
       expect(() => chainFromName("marketplace")).toThrow("Unknown chain: marketplace")
       expect(() => chainFromName("rosario")).toThrow("Unknown chain: rosario")
@@ -77,7 +60,7 @@ describe("chainFromName", () => {
 
   describe("chain properties", () => {
     test("returned chain has required viem Chain properties", () => {
-      const chain = chainFromName("kaolin")
+      const chain = chainFromName("atlas")
 
       expect(chain).toHaveProperty("id")
       expect(chain).toHaveProperty("name")
@@ -89,7 +72,7 @@ describe("chainFromName", () => {
     })
 
     test("returned chain has rpcUrls configured", () => {
-      const chain = chainFromName("braga")
+      const chain = chainFromName("localhost")
 
       expect(chain.rpcUrls).toBeDefined()
       expect(chain.rpcUrls.default).toBeDefined()

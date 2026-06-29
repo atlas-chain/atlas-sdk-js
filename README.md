@@ -94,11 +94,11 @@ You can now use Arkiv's public client to query data. Paste the following in `rea
 
 ```typescript
 import { createPublicClient, http } from "@atlas-chain/sdk"
-import { braga } from "@atlas-chain/sdk/chains"
+import { atlas } from "@atlas-chain/sdk/chains"
 import { eq } from "@atlas-chain/sdk/query"
 
 const publicClient = createPublicClient({
-  chain: braga, // "braga" is Arkiv's testnet
+  chain: atlas,
   transport: http(),
 });
 
@@ -172,17 +172,17 @@ Create a file named `write_example.ts` with the following content:
 ```typescript
 import { createPublicClient, createWalletClient, http } from "@atlas-chain/sdk"
 import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
-import { braga } from "@atlas-chain/sdk/chains"
+import { atlas } from "@atlas-chain/sdk/chains"
 import { ExpirationTime, jsonToPayload } from "@atlas-chain/sdk/utils"
 
 // Create a public client
 const publicClient = createPublicClient({
-  chain: braga, // braga is the Arkiv testnet
+  chain: atlas,
   transport: http(),
 })
 // Create a wallet client with an account
 const client = createWalletClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
   account: privateKeyToAccount('0x...'), // Replace with your private key
 });
@@ -231,8 +231,7 @@ Now you can run it in the same way as in the previous example:
 **Note:**  
 You must provide your own private key with a minimum balance on the Arkiv L3 network.  
 You can generate a private key using any tool, for example: https://vanity-eth.tk/  
-Once you have a key, you can paste it into the example above and fund its address using the Arkiv Braga testnet faucet at:  
-https://braga.hoodi.arkiv.network/faucet/
+Once you have a key, you can paste it into the example above and fund its address on the Atlas network.
 
 For quick testing, you may use this example key:
 ```
@@ -314,5 +313,4 @@ DEBUG=arkiv:* bun run your-script
 ```
 
 Adjust the namespace (for example, `arkiv:rpc` or `arkiv:query`) to target specific log sources. Unset `DEBUG` to silence debug output.
-
 

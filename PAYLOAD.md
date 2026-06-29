@@ -364,7 +364,7 @@ import {
   toBytes,
 } from "@atlas-chain/sdk"
 import { privateKeyToAccount } from "@atlas-chain/sdk/accounts"
-import { braga } from "@atlas-chain/sdk/chains"
+import { atlas } from "@atlas-chain/sdk/chains"
 import { ExpirationTime } from "@atlas-chain/sdk/utils"
 
 type JsonValue =
@@ -408,7 +408,7 @@ function canonicalAttributes(attributes: Attribute[]): Attribute[] {
 }
 
 const client = createWalletClient({
-  chain: braga,
+  chain: atlas,
   transport: http(),
   account: privateKeyToAccount("0x..."),
 })

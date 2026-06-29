@@ -1,10 +1,10 @@
 import { createPublicClient, http } from "@atlas-chain/sdk"
-import { braga } from "@atlas-chain/sdk/chains"
+import { atlas } from "@atlas-chain/sdk/chains"
 import { eq } from "@atlas-chain/sdk/query"
 
 // Create a public client
 const publicClient = createPublicClient({
-  chain: braga, // braga is the Arkiv testnet
+  chain: atlas,
   transport: http(),
 })
 
